@@ -77,7 +77,15 @@ MainWindow::MainWindow()
 
     setCurrentFile(QString());
     setUnifiedTitleAndToolBarOnMac(true);
+
+
+
+    //INIT NOT TEMPLATE
+
 }
+
+
+
 //! [2]
 
 //! [3]
@@ -98,7 +106,7 @@ void MainWindow::newFile()
 //! [5] //! [6]
 {
     if (maybeSave()) {
-        textEdit->clear();
+         textEdit->clear();
         setCurrentFile(QString());
     }
 }
@@ -145,7 +153,7 @@ bool MainWindow::saveAs()
 void MainWindow::about()
 //! [13] //! [14]
 {
-   QMessageBox::about(this, tr("About Application"),
+   QMessageBox::information(this, tr("About Application"),
             tr("The <b>Application</b> example demonstrates how to "
                "write modern GUI applications using Qt, with a menu bar, "
                "toolbars, and a status bar."));

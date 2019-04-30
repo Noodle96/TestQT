@@ -51,6 +51,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+
+#include<iostream>
+#include"afd.h"
+
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -96,6 +100,13 @@ private:
 
     QPlainTextEdit *textEdit;
     QString curFile;
+
+
+
+
+    AUTOMATA::AFD<std::string,std::string> afdVariables ;
+
+
 };
 //! [0]
 

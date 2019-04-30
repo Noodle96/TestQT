@@ -212,6 +212,7 @@ DIST          = /opt/Qt/5.12.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/spec_post.prf \
+		../application/.qmake.stash \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -231,7 +232,8 @@ DIST          = /opt/Qt/5.12.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/exceptions.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/lex.prf \
-		../application/application.pro ../application/mainwindow.h ../application/main.cpp \
+		../application/application.pro ../application/mainwindow.h \
+		../application/afd.h ../application/main.cpp \
 		../application/mainwindow.cpp
 QMAKE_TARGET  = application
 DESTDIR       = 
@@ -397,6 +399,7 @@ Makefile: ../application/application.pro /opt/Qt/5.12.1/gcc_64/mkspecs/linux-g++
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -575,6 +578,7 @@ Makefile: ../application/application.pro /opt/Qt/5.12.1/gcc_64/mkspecs/linux-g++
 /opt/Qt/5.12.1/gcc_64/mkspecs/features/qt_config.prf:
 /opt/Qt/5.12.1/gcc_64/mkspecs/linux-g++/qmake.conf:
 /opt/Qt/5.12.1/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /opt/Qt/5.12.1/gcc_64/mkspecs/features/exclusive_builds.prf:
 /opt/Qt/5.12.1/gcc_64/mkspecs/features/toolchain.prf:
 /opt/Qt/5.12.1/gcc_64/mkspecs/features/default_pre.prf:
@@ -615,7 +619,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../application/application.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/5.12.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../application/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../application/mainwindow.h ../application/afd.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../application/main.cpp ../application/mainwindow.cpp $(DISTDIR)/
 
 
@@ -663,6 +667,7 @@ compiler_moc_header_make_all: moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp
 moc_mainwindow.cpp: ../application/mainwindow.h \
+		../application/afd.h \
 		/opt/Qt/5.12.1/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt/5.12.1/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt/5.12.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -903,6 +908,7 @@ main.o: ../application/main.cpp /opt/Qt/5.12.1/gcc_64/include/QtWidgets/QApplica
 		/opt/Qt/5.12.1/gcc_64/include/QtCore/qcommandlineoption.h \
 		/opt/Qt/5.12.1/gcc_64/include/QtCore/QCommandLineOption \
 		../application/mainwindow.h \
+		../application/afd.h \
 		/opt/Qt/5.12.1/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt/5.12.1/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt/5.12.1/gcc_64/include/QtWidgets/qtabwidget.h \
@@ -1369,6 +1375,7 @@ mainwindow.o: ../application/mainwindow.cpp /opt/Qt/5.12.1/gcc_64/include/QtWidg
 		/opt/Qt/5.12.1/gcc_64/include/QtWidgets/qwizard.h \
 		/opt/Qt/5.12.1/gcc_64/include/QtWidgets/qtwidgetsversion.h \
 		../application/mainwindow.h \
+		../application/afd.h \
 		/opt/Qt/5.12.1/gcc_64/include/QtWidgets/QMainWindow
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../application/mainwindow.cpp
 
