@@ -74,6 +74,10 @@ public:
 
     void loadFile(const QString &fileName);
 
+
+    //function not template
+    void BuildAutomathonToVariables();
+
 protected:
     void closeEvent(QCloseEvent *event) override;
 
@@ -83,6 +87,7 @@ private slots:
     bool save();
     bool saveAs();
     void about();
+    void message();
     void documentWasModified();
 #ifndef QT_NO_SESSIONMANAGER
     void commitData(QSessionManager &);
@@ -104,7 +109,8 @@ private:
 
 
 
-    AUTOMATA::AFD<std::string,std::string> afdVariables ;
+    AUTOMATA::AFD<std::string,std::string> afdVariables;
+    AUTOMATA::AFD<std::string , std::string> afdNUmbers;
 
 
 };

@@ -81,7 +81,7 @@ MainWindow::MainWindow()
 
 
     //INIT NOT TEMPLATE
-
+    BuildAutomathonToVariables();
 }
 
 
@@ -169,17 +169,31 @@ void MainWindow::documentWasModified()
 //! [16]
 
 //! [17]
-void MainWindow::createActions()
-//! [17] //! [18]
-{
 
+void MainWindow::message(){
+    QMessageBox::information(this,"Aviso","cartas de clash royale");
+    afdVariables.printAFD();
+}
+
+
+
+
+
+
+
+void MainWindow::createActions()
+//! [17]
+{
+    //! [18] QMENU FILE
     QMenu *fileMenu = menuBar()->addMenu(tr("&File"));
     QToolBar *fileToolBar = addToolBar(tr("File"));
+
+
     const QIcon newIcon = QIcon::fromTheme("document-new", QIcon(":/images/new.png"));
     QAction *newAct = new QAction(newIcon, tr("&New"), this);
     newAct->setShortcuts(QKeySequence::New);
     newAct->setStatusTip(tr("Create a new file"));
-    connect(newAct, &QAction::triggered, this, &MainWindow::newFile);
+    connect(newAct, &QAction::triggered, this, &MainWindow::newFile);    
     fileMenu->addAction(newAct);
     fileToolBar->addAction(newAct);
 
@@ -208,7 +222,7 @@ void MainWindow::createActions()
 
 //! [20]
 
-    fileMenu->addSeparator();
+    fileMenu->addSeparator(); //agrega -----------------------
 
     const QIcon exitIcon = QIcon::fromTheme("application-exit");
     QAction *exitAct = fileMenu->addAction(exitIcon, tr("E&xit"), this, &QWidget::close);
@@ -216,7 +230,16 @@ void MainWindow::createActions()
 //! [20]
     exitAct->setStatusTip(tr("Exit the application"));
 
-//! [21]
+
+
+
+
+
+
+
+
+
+//! [21]  QMENU EDIT
     QMenu *editMenu = menuBar()->addMenu(tr("&Edit"));
     QToolBar *editToolBar = addToolBar(tr("Edit"));
 //!
@@ -253,6 +276,32 @@ void MainWindow::createActions()
 
 #endif // !QT_NO_CLIPBOARD
 
+
+
+
+    //QMENU BUILD
+    //agregando el menuBar el toolbar para Build
+    QMenu *buildMenu = menuBar()->addMenu("&Build");
+    QToolBar *buildToolBar = addToolBar("Build") ;
+    const QIcon runIcon = QIcon::fromTheme("", QIcon(":/images/run.jpeg"));
+    QAction *runAct = new QAction(runIcon, tr("&Run"), this);
+    runAct->setStatusTip(tr("Run The Program"));
+    //objeto,tipoobjeto::senhial,
+    connect(runAct,&QAction::triggered,this,&MainWindow::message);
+    buildMenu->addAction(runAct);
+    buildToolBar->addAction(runAct);
+
+
+
+
+
+
+
+
+
+
+
+    //QMENU HELPMENU
     QMenu *helpMenu = menuBar()->addMenu(tr("&Help"));
     QAction *aboutAct = helpMenu->addAction(tr("&About"), this, &MainWindow::about);
     aboutAct->setStatusTip(tr("Show the application's About box"));
@@ -264,6 +313,17 @@ void MainWindow::createActions()
 //! [22]
 
 //! [23]
+
+
+
+
+
+
+
+
+
+
+
 #ifndef QT_NO_CLIPBOARD
     cutAct->setEnabled(false);
 //! [23] //! [24]
@@ -274,6 +334,13 @@ void MainWindow::createActions()
 }
 //! [24]
 
+
+
+
+
+
+
+
 //! [32]
 void MainWindow::createStatusBar()
 //! [32] //! [33]
@@ -283,6 +350,14 @@ void MainWindow::createStatusBar()
 //! [33]
 
 //! [34] //! [35]
+
+
+
+
+
+
+
+
 void MainWindow::readSettings()
 //! [34] //! [36]
 {
@@ -299,6 +374,15 @@ void MainWindow::readSettings()
 }
 //! [35] //! [36]
 
+
+
+
+
+
+
+
+
+
 //! [37] //! [38]
 void MainWindow::writeSettings()
 //! [37] //! [39]
@@ -307,6 +391,18 @@ void MainWindow::writeSettings()
     settings.setValue("geometry", saveGeometry());
 }
 //! [38] //! [39]
+
+
+
+
+
+
+
+
+
+
+
+
 
 //! [40]
 bool MainWindow::maybeSave()
@@ -330,6 +426,17 @@ bool MainWindow::maybeSave()
     return true;
 }
 //! [41]
+
+
+
+
+
+
+
+
+
+
+
 
 //! [42]
 void MainWindow::loadFile(const QString &fileName)
@@ -356,6 +463,15 @@ void MainWindow::loadFile(const QString &fileName)
     statusBar()->showMessage(tr("File loaded"), 2000);
 }
 //! [43]
+
+
+
+
+
+
+
+
+
 
 //! [44]
 bool MainWindow::saveFile(const QString &fileName)
@@ -385,6 +501,20 @@ bool MainWindow::saveFile(const QString &fileName)
 }
 //! [45]
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //! [46]
 void MainWindow::setCurrentFile(const QString &fileName)
 //! [46] //! [47]
@@ -400,12 +530,26 @@ void MainWindow::setCurrentFile(const QString &fileName)
 }
 //! [47]
 
+
+
+
+
+
+
 //! [48]
 QString MainWindow::strippedName(const QString &fullFileName)
 //! [48] //! [49]
 {
     return QFileInfo(fullFileName).fileName();
 }
+
+
+
+
+
+
+
+
 //! [49]
 #ifndef QT_NO_SESSIONMANAGER
 void MainWindow::commitData(QSessionManager &manager)
@@ -420,3 +564,11 @@ void MainWindow::commitData(QSessionManager &manager)
     }
 }
 #endif
+
+
+
+
+
+
+
+//END MAINWINDOWS.H
