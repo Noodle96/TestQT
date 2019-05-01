@@ -136,7 +136,60 @@ void MainWindow::BuildAutomathonToVariables(){
 }
 
 
+void MainWindow::BuildAutomathonToNumbers(){
+    //add los estados totales
+    std::string mystates[]={"q1","q2","q3","q4","q5","q6"};
+    std::list<std::string> bloquestates(mystates, mystates + sizeof(mystates) / sizeof (std::string));
+    afdNumbers.addStateByBloque(bloquestates);
+    //seteando estado inicial
+    afdNumbers.setInitialState("q1");
+    //ad finalstate
+    afdNumbers.addFinalState("q2");afdNumbers.addFinalState("q5");
+    //add alphabet
+    std::string myalphabet[] = {"0","1","2","3","4","5","6","7","8","9",".","-"};
+    std::list<std::string> bloqueAlphabet(myalphabet, myalphabet + sizeof (myalphabet) / sizeof (std::string));
+    afdNumbers.addAlphabetByBloque(bloqueAlphabet);
+    afdNumbers.fillMatrizAdyacencia("q1","0","q2");afdNumbers.fillMatrizAdyacencia("q1","1","q2");
+    afdNumbers.fillMatrizAdyacencia("q1","2","q2");afdNumbers.fillMatrizAdyacencia("q1","3","q2");
+    afdNumbers.fillMatrizAdyacencia("q1","4","q2");afdNumbers.fillMatrizAdyacencia("q1","5","q2");
+    afdNumbers.fillMatrizAdyacencia("q1","6","q2");afdNumbers.fillMatrizAdyacencia("q1","7","q2");
+    afdNumbers.fillMatrizAdyacencia("q1","8","q2");afdNumbers.fillMatrizAdyacencia("q1","9","q2");
+    afdNumbers.fillMatrizAdyacencia("q1",".","q6");afdNumbers.fillMatrizAdyacencia("q1","-","q3");
 
+    afdNumbers.fillMatrizAdyacencia("q2","0","q2");afdNumbers.fillMatrizAdyacencia("q2","1","q2");
+    afdNumbers.fillMatrizAdyacencia("q2","2","q2");afdNumbers.fillMatrizAdyacencia("q2","3","q2");
+    afdNumbers.fillMatrizAdyacencia("q2","4","q2");afdNumbers.fillMatrizAdyacencia("q2","5","q2");
+    afdNumbers.fillMatrizAdyacencia("q2","6","q2");afdNumbers.fillMatrizAdyacencia("q2","7","q2");
+    afdNumbers.fillMatrizAdyacencia("q2","8","q2");afdNumbers.fillMatrizAdyacencia("q2","9","q2");
+    afdNumbers.fillMatrizAdyacencia("q2",".","q4");afdNumbers.fillMatrizAdyacencia("q2","-","q6");
 
+    afdNumbers.fillMatrizAdyacencia("q3","0","q2");afdNumbers.fillMatrizAdyacencia("q3","1","q2");
+    afdNumbers.fillMatrizAdyacencia("q3","2","q2");afdNumbers.fillMatrizAdyacencia("q3","3","q2");
+    afdNumbers.fillMatrizAdyacencia("q3","4","q2");afdNumbers.fillMatrizAdyacencia("q3","5","q2");
+    afdNumbers.fillMatrizAdyacencia("q3","6","q2");afdNumbers.fillMatrizAdyacencia("q3","7","q2");
+    afdNumbers.fillMatrizAdyacencia("q3","8","q2");afdNumbers.fillMatrizAdyacencia("q3","9","q2");
+    afdNumbers.fillMatrizAdyacencia("q3",".","q6");afdNumbers.fillMatrizAdyacencia("q3","-","q6");
+
+    afdNumbers.fillMatrizAdyacencia("q4","0","q5");afdNumbers.fillMatrizAdyacencia("q4","1","q5");
+    afdNumbers.fillMatrizAdyacencia("q4","2","q5");afdNumbers.fillMatrizAdyacencia("q4","3","q5");
+    afdNumbers.fillMatrizAdyacencia("q4","4","q5");afdNumbers.fillMatrizAdyacencia("q4","5","q5");
+    afdNumbers.fillMatrizAdyacencia("q4","6","q5");afdNumbers.fillMatrizAdyacencia("q4","7","q5");
+    afdNumbers.fillMatrizAdyacencia("q4","8","q5");afdNumbers.fillMatrizAdyacencia("q4","9","q5");
+    afdNumbers.fillMatrizAdyacencia("q4",".","q6");afdNumbers.fillMatrizAdyacencia("q4","-","q6");
+
+    afdNumbers.fillMatrizAdyacencia("q5","0","q5");afdNumbers.fillMatrizAdyacencia("q5","1","q5");
+    afdNumbers.fillMatrizAdyacencia("q5","2","q5");afdNumbers.fillMatrizAdyacencia("q5","3","q5");
+    afdNumbers.fillMatrizAdyacencia("q5","4","q5");afdNumbers.fillMatrizAdyacencia("q5","5","q5");
+    afdNumbers.fillMatrizAdyacencia("q5","6","q5");afdNumbers.fillMatrizAdyacencia("q5","7","q5");
+    afdNumbers.fillMatrizAdyacencia("q5","8","q5");afdNumbers.fillMatrizAdyacencia("q5","9","q5");
+    afdNumbers.fillMatrizAdyacencia("q5",".","q6");afdNumbers.fillMatrizAdyacencia("q5","-","q6");
+
+    afdNumbers.fillMatrizAdyacencia("q6","0","q6");afdNumbers.fillMatrizAdyacencia("q6","1","q6");
+    afdNumbers.fillMatrizAdyacencia("q6","2","q6");afdNumbers.fillMatrizAdyacencia("q6","3","q6");
+    afdNumbers.fillMatrizAdyacencia("q6","4","q6");afdNumbers.fillMatrizAdyacencia("q6","5","q6");
+    afdNumbers.fillMatrizAdyacencia("q6","6","q6");afdNumbers.fillMatrizAdyacencia("q6","7","q6");
+    afdNumbers.fillMatrizAdyacencia("q6","8","q6");afdNumbers.fillMatrizAdyacencia("q6","9","q6");
+    afdNumbers.fillMatrizAdyacencia("q6",".","q6");afdNumbers.fillMatrizAdyacencia("q6","-","q6");
+}
 
 // end buildautomathon.cpp

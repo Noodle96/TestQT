@@ -1,5 +1,7 @@
 #ifndef AFD_H
 #define AFD_H
+
+
 #include<iostream>
 #include<map>
 #include<list>
@@ -55,7 +57,7 @@ namespace AUTOMATA {
             std::cout << "Imprimiendo la Matriz de adyacencia" << std::endl;
             for(auto it = MAdyacencia.begin() ; it != MAdyacencia.end() ; it++){
                 //std::cout << (*it).first << "->";
-                std::cout << "hola" << std::endl;
+                //std::cout << "hola" << std::endl;
                 for(auto et = (*it).second.begin()  ; et != (*it).second.end() ; et++){
                     std::cout << (*it).first << " " << (*et).first << " " << (*et).second << std::endl;
                 }
@@ -95,7 +97,7 @@ namespace AUTOMATA {
             //caso contrario no
             //IteFind = NULL;
 
-            qDebug() << QString::fromLocal8Bit(currentState.c_str()) ;
+            //qDebug() << QString::fromLocal8Bit(currentState.c_str()) ;
             IteFind = this->finalStates.find(currentState);
             if(IteFind != finalStates.end()){ //find
                 return 1;

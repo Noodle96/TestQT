@@ -5,7 +5,8 @@ HEADERS       = mainwindow.h \
     afd.h
 SOURCES       = main.cpp \
                 mainwindow.cpp \
-    buildautomathon.cpp
+    buildautomathon.cpp \
+    buildwordreserved.cpp
 #! [0]
 RESOURCES     = \
     application.qrc

@@ -82,6 +82,8 @@ MainWindow::MainWindow()
 
     //INIT NOT TEMPLATE
     BuildAutomathonToVariables();
+    BuildAutomathonToNumbers();
+    BuildHashWordReserve();
 }
 
 
@@ -172,8 +174,14 @@ void MainWindow::documentWasModified()
 
 void MainWindow::message(){
     QMessageBox::information(this,"Aviso","cartas de clash royale");
-    afdVariables.printAFD();
+    //afdVariables.printAFD();
+    /*
     std::cout << afdVariables.DeltaHat("Monos4653") << std::endl;
+    for(auto it = this->wordReserved.begin() ; it != wordReserved.end() ; it++){
+        std::cout << (*it).first << " " << (*it).second << std::endl;
+    }*/
+    //afdNumbers.printAFD();
+    //std::cout << afdNumbers.DeltaHat(".83264") << std::endl;
 }
 
 

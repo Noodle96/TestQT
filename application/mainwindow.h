@@ -53,6 +53,8 @@
 
 
 #include<iostream>
+#include<unordered_map> //hash
+
 #include"afd.h"
 
 #include <QMainWindow>
@@ -77,6 +79,8 @@ public:
 
     //function not template
     void BuildAutomathonToVariables();
+    void BuildAutomathonToNumbers();
+    void BuildHashWordReserve();
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -110,7 +114,19 @@ private:
 
 
     AUTOMATA::AFD<std::string,std::string> afdVariables;
-    AUTOMATA::AFD<std::string , std::string> afdNUmbers;
+    AUTOMATA::AFD<std::string , std::string> afdNumbers;
+
+
+    //hash para las palabras reservadas y simbolos de c++
+    std::unordered_map<std::string,std::string> wordReserved;
+
+    //tabla se simbolos
+    std::unordered_map<std::string,std::list<std::string>> tablaSimbolos;
+    //buffer
+    std::list<std::pair<std::string,std::string>> buffer;
+    //tabla de errores
+    std::vector<std::string> tablaErrores;
+
 
 
 };
