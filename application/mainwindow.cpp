@@ -173,7 +173,9 @@ void MainWindow::documentWasModified()
 void MainWindow::message(){
     QMessageBox::information(this,"Aviso","cartas de clash royale");
     afdVariables.printAFD();
+    std::cout << afdVariables.DeltaHat("Monos4653") << std::endl;
 }
+
 
 
 

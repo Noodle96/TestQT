@@ -3,6 +3,7 @@
 #include<iostream>
 #include<map>
 #include<list>
+#include<QDebug>
 
 
 namespace AUTOMATA {
@@ -14,7 +15,7 @@ namespace AUTOMATA {
         TS initialState;
         std::map<TS,TS> finalStates;
         std::map< TS,std::map<TA,TS>> MAdyacencia;
-        std::map< TS,std::map<TA, std::list<TS>>> MTest;
+        //std::map< TS,std::map<TA, std::list<TS>>> MTest;
     public:
         AFD(){}
         ~AFD(){}
@@ -68,11 +69,42 @@ namespace AUTOMATA {
             *monos       Esta palabara no aceptara
             alias        esta palabra sera aceptada
         */
-        bool DeltaHat(std::string){
+        bool DeltaHat(std::string phrase){
             //el filtro estara incluido dentro de la funcion delta hat
+            //verificaremos que la cadena venga con los caracteres permitidos
+            typename std::map<TA,TA>::iterator IteFind;
+            std::string s;
+            for(auto it = phrase.begin() ; it != phrase.end() ; it++){
+                 s = (1,(*it));
+                IteFind = alphabet.find(s);
+                if(IteFind != alphabet.end()){//find
+                      continue;
+                }else{//not find
+                    return  0;
+                }
 
+            }
+            //si llega por aca es que "phrase" esta con el dominio del alfabeto dado.
+            TS currentState = this->initialState;
+            for(auto it = phrase.begin() ; it != phrase.end()  ;it++){
+                s = (1,(*it));
+                currentState = this->MAdyacencia[currentState][s];
+            }
 
+            //ahora buscaremos currentState en el map de finalStates, en caso si este es aceptado
+            //caso contrario no
+            //IteFind = NULL;
+
+            qDebug() << QString::fromLocal8Bit(currentState.c_str()) ;
+            IteFind = this->finalStates.find(currentState);
+            if(IteFind != finalStates.end()){ //find
+                return 1;
+            }else{//not find
+                return 0;
+            }
         }
+
+
 
         //funciones alternativos
         void addStateByBloque(std::list<TS> &bloque){
