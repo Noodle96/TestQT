@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
 **
 ** Copyright (C) 2016 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
@@ -103,6 +103,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 }
 //! [4]
 
+
+
+
+                    //PRIVATE SLOTS
+
 //! [5]
 void MainWindow::newFile()
 //! [5] //! [6]
@@ -111,14 +116,21 @@ void MainWindow::newFile()
          textEdit->clear();
         setCurrentFile(QString());
     }
+
 }
 //! [6]
+
+
+
+
+
+
 
 //! [7]
 void MainWindow::open()
 //! [7] //! [8]
 {
-    if (maybeSave()) {
+    if (maybeSave()) { // maybeSave  verifica si hay un texto de entrada para guardarlo en caso
         QString fileName = QFileDialog::getOpenFileName(this);
         if (!fileName.isEmpty())
             loadFile(fileName);
@@ -138,6 +150,8 @@ bool MainWindow::save()
 }
 //! [10]
 
+
+
 //! [11]
 bool MainWindow::saveAs()
 //! [11] //! [12]
@@ -150,6 +164,8 @@ bool MainWindow::saveAs()
     return saveFile(dialog.selectedFiles().first());
 }
 //! [12]
+
+
 
 //! [13]
 void MainWindow::about()
@@ -185,10 +201,49 @@ void MainWindow::message(){
 }
 
 
+void MainWindow::generateTables(){
+    tablaSimbolos.clear();
+    buffer.clear();
+    tablaErrores.clear();
+    std::string filenameCurrent = curFile.toStdString();
+    std::fstream entrada;
+    std::string line;
+    std::list<std::string> listWords;
+    unsigned int numLinea = 1;
+    entrada.open(filenameCurrent, std::ios::in);
+    while(getline(entrada,line)){
+        //qDebug() << QString::fromStdString(line);
+        //comentar esta linea cuando thales haga su tarea
+        convertStringToList(line,listWords);
+        /*
+            con la funcion LIMPIAR devolvera la linea limpia
+        */
+        visitLine(listWords,numLinea);
+        listWords.clear();numLinea++;
+    }
+    entrada.close();
+
+    printTablaSimbolos();
+    printBuffer();
+    printTablaErrores();
+}
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+                                        //FUNCIONES PRIVATE
 
 
 void MainWindow::createActions()
@@ -297,7 +352,8 @@ void MainWindow::createActions()
     QAction *runAct = new QAction(runIcon, tr("&Run"), this);
     runAct->setStatusTip(tr("Run The Program"));
     //objeto,tipoobjeto::senhial,
-    connect(runAct,&QAction::triggered,this,&MainWindow::message);
+    connect(runAct,&QAction::triggered,this,&MainWindow::generateTables);
+    //runAct->setEnabled(false);
     buildMenu->addAction(runAct);
     buildToolBar->addAction(runAct);
 
@@ -420,6 +476,7 @@ bool MainWindow::maybeSave()
 {
     if (!textEdit->document()->isModified())
         return true;
+    //pasa aqui en caso de que hay aido modificado
     const QMessageBox::StandardButton ret
         = QMessageBox::warning(this, tr("Application"),
                                tr("The document has been modified.\n"
@@ -507,6 +564,7 @@ bool MainWindow::saveFile(const QString &fileName)
 
     setCurrentFile(fileName);
     statusBar()->showMessage(tr("File saved"), 2000);
+
     return true;
 }
 //! [45]
@@ -529,6 +587,7 @@ bool MainWindow::saveFile(const QString &fileName)
 void MainWindow::setCurrentFile(const QString &fileName)
 //! [46] //! [47]
 {
+    qDebug() << fileName;
     curFile = fileName;
     textEdit->document()->setModified(false);
     setWindowModified(false);

@@ -24,7 +24,8 @@ void MainWindow::BuildHashWordReserve(){
                                       "protected","public","register","reinterpret_cast","return","short","signed",
                                       "sizeof","static","static_assert","static_cast","struct","switch","template",
                                       "this","thread_local","throw","true","try","typedef","typeid","typename","union",
-                                      "unsigned","using","virtual","void","volatile","wchar_t","while","xor","xor_eq"};
+                                      "unsigned","using","virtual","void","volatile","wchar_t","while","xor","xor_eq",
+                                      "main"};
     std::list<std::string> bloqueReservedWord(mywordReserved, mywordReserved + sizeof (mywordReserved) / sizeof (std::string) );
     for(auto it = bloqueReservedWord.begin() ; it != bloqueReservedWord.end() ; it++){
         wordReserved.insert(std::make_pair((*it),TOKEN+(*it)));

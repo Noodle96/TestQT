@@ -53,6 +53,7 @@
 
 
 #include<iostream>
+#include<fstream>
 #include<unordered_map> //hash
 
 #include"afd.h"
@@ -81,6 +82,16 @@ public:
     void BuildAutomathonToVariables();
     void BuildAutomathonToNumbers();
     void BuildHashWordReserve();
+    void visitLine(std::list<std::string>&,unsigned int);
+    void convertStringToList(std::string,std::list<std::string>&);
+    void quitarTabs(std::string &linea);
+    bool contienePunto(std::string);
+
+    //printed
+    void printTablaSimbolos();
+    void printBuffer();
+    void printTablaErrores();
+
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -92,6 +103,7 @@ private slots:
     bool saveAs();
     void about();
     void message();
+    void generateTables(); //dado el archivo curFile llenara la tabla de simbolos, buffer o tabla de errores
     void documentWasModified();
 #ifndef QT_NO_SESSIONMANAGER
     void commitData(QSessionManager &);
