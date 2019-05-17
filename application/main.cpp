@@ -57,6 +57,7 @@
 
 int main(int argc, char *argv[])
 {
+    // hola amiguitos
     Q_INIT_RESOURCE(application);
 
     QApplication app(argc, argv);
