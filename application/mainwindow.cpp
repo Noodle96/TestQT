@@ -226,6 +226,11 @@ void MainWindow::generateTables(){
     printTablaSimbolos();
     printBuffer();
     printTablaErrores();
+
+    //parte del analisis sintactico
+    //CODE HERE
+
+
 }
 
 
