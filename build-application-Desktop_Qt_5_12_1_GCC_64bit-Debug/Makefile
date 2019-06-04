@@ -241,7 +241,8 @@ DIST          = /opt/Qt/5.12.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/5.12.1/gcc_64/mkspecs/features/lex.prf \
 		../application/application.pro ../application/mainwindow.h \
-		../application/afd.h ../application/main.cpp \
+		../application/afd.h \
+		../application/syntacticanalysis.h ../application/main.cpp \
 		../application/mainwindow.cpp \
 		../application/buildautomathon.cpp \
 		../application/buildwordreserved.cpp \
@@ -631,7 +632,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../application/application.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/5.12.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../application/mainwindow.h ../application/afd.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../application/mainwindow.h ../application/afd.h ../application/syntacticanalysis.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../application/main.cpp ../application/mainwindow.cpp ../application/buildautomathon.cpp ../application/buildwordreserved.cpp ../application/line.cpp ../application/funcionessupport.cpp $(DISTDIR)/
 
 

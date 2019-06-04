@@ -2,7 +2,8 @@ QT += widgets
 requires(qtConfig(filedialog))
 
 HEADERS       = mainwindow.h \
-    afd.h
+    afd.h \
+    syntacticanalysis.h
 SOURCES       = main.cpp \
                 mainwindow.cpp \
     buildautomathon.cpp \

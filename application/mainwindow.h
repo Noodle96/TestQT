@@ -57,6 +57,7 @@
 #include<unordered_map> //hash
 
 #include"afd.h"
+#include"syntacticanalysis.h"
 
 #include <QMainWindow>
 
@@ -133,11 +134,19 @@ private:
     std::unordered_map<std::string,std::string> wordReserved;
 
     //tabla se simbolos
+    //<TOKEN_if,if>
+    //<TOKEN_id,id id a er ....>
     std::unordered_map<std::string,std::list<std::string>> tablaSimbolos;
     //buffer
+    //<TOKEN_id,ropa>
     std::list<std::pair<std::string,std::string>> buffer;
     //tabla de errores
     std::vector<std::string> tablaErrores;
+
+
+
+    //para el analisis sintactico
+    SintacticAnalysis analisiSintactico;
 
 
 
