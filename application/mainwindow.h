@@ -94,6 +94,10 @@ public:
     void printTablaErrores();
 
 
+    //sintactic part
+    void BuildSintacticAnalysis();
+
+
 protected:
     void closeEvent(QCloseEvent *event) override;
 

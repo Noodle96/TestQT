@@ -9,7 +9,8 @@ SOURCES       = main.cpp \
     buildautomathon.cpp \
     buildwordreserved.cpp \
     line.cpp \
-    funcionessupport.cpp
+    funcionessupport.cpp \
+    buildsintacticanalysis.cpp
 #! [0]
 RESOURCES     = \
     application.qrc
