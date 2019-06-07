@@ -228,10 +228,9 @@ void MainWindow::generateTables(){
     printTablaErrores();
 
     //parte del analisis sintactico
-    //CODE HERE
-
-
-
+    BuildSintacticAnalysis();
+    analisiSintactico.PrintBufferCpy();
+    analisiSintactico.printTablaAnalisisSintatico();
 
 
 }
