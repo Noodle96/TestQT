@@ -1,4 +1,1 @@
-hola perro 
-int main
-{ }
-;
+for i in range
