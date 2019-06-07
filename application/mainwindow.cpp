@@ -239,7 +239,7 @@ void MainWindow::generateTables(){
     //parte del analisis sintactico
 
     analisiSintactico.printTablaAnalisisSintatico();
-    analisiSintactico.verifyBufferCpyValidation();
+    analisiSintactico.verifyBufferCpyValidation(buffer);
 
 
 }

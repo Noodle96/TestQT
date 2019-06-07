@@ -35,6 +35,8 @@ public:
 /// T -> T * T | T / F | F
 /// F -> i | c
 ///
+
+
 class SintacticAnalysis{
 public:
     std::map< NOTERMINAL,std::map< TERMINAL,std::list<TNT> > > tablaAnalisisSintactico;
@@ -66,9 +68,41 @@ public:
             std::cout << std::endl;
         }
     }
+    void pushPila(std::stack<TNT> &pl,TNT elem){
+        pl.push(elem);
+    }
 
-    bool verifyBufferCpyValidation(){
+    bool verifyBufferCpyValidation( const std::list<std::pair<std::string,std::string>> &buffer){
+        //pusheando la pila con $
+        std::stack<TNT> pila;
+        pila.push("$");
+        pila.push("E"); //initial in buildsintacticanalysis.cpp
 
+
+        //copiando buffer a bufferCopy
+        for(auto it = buffer.begin() ; it != buffer.end(); it++){
+            bufferCpy.push_back((*it));
+        }
+
+        bufferCpy.push_back( std::make_pair("$","$" ));
+
+        //haciendo el reconocimiento de el buffercopy con la pila(push and pop)
+        //![1] v1
+        std::list<TNT> listTemp;
+        for (auto it = bufferCpy.begin(); it != bufferCpy.end();it++){
+            //primer caso
+            if( pila.top() == (*it).first ){ //relacionamos a , es decir sale de la pila y del buffer
+                pila.pop();continue;
+            }else {
+                if(tablaAnalisisSintactico[pila.top() ][ (*it).first].empty()){ //No llega nada [a][b] = ""  |=>| error no salvable
+                    //llenar la tabla de errores
+                }
+            }
+        }
+
+        //std::cout << tablaAnalisisSintactico["E"]["TOKEN_*"].empty() << std::endl; // 1 or 0 => ok
+
+        //![1]
     }
 
 

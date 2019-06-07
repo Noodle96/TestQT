@@ -21,6 +21,7 @@ void MainWindow::BuildSintacticAnalysis(){
         e : desapilar de la pila
     */
 
+    //Initial element E of table sintactic ll1
 
     //ahora manualmente llenado la tabla de analisis sintactica LL1
     analisiSintactico.insertInTablaAnalisSintactico("E","TOKEN_id","T");analisiSintactico.insertInTablaAnalisSintactico("E","TOKEN_id","Ep");
