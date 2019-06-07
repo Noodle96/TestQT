@@ -38,7 +38,7 @@ public:
 class SintacticAnalysis{
 public:
     std::map< NOTERMINAL,std::map< TERMINAL,std::list<TNT> > > tablaAnalisisSintactico;
-    std::stack<TNT> pila;
+    //std::stack<TNT> pila;
     std::list<std::pair<std::string,std::string>> bufferCpy;
 public:
     void insertInTablaAnalisSintactico(NOTERMINAL nt, TERMINAL ter, TNT tnt){
@@ -67,10 +67,17 @@ public:
         }
     }
 
+    bool verifyBufferCpyValidation(){
+
+    }
+
+
 
 
 };
 // estamos en el proyecto actual
+
+
 
 
 #endif // SYNTACTICANALYSIS_H

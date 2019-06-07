@@ -81,9 +81,14 @@ MainWindow::MainWindow()
 
 
     //INIT NOT TEMPLATE
+
+    //TO ANALISIS LEXICO
     BuildAutomathonToVariables();
     BuildAutomathonToNumbers();
     BuildHashWordReserve();
+
+    //TO ANALISIS SINTACTICO
+    BuildSintacticAnalysis();
 }
 
 
@@ -203,8 +208,12 @@ void MainWindow::message(){
 
 void MainWindow::generateTables(){
     tablaSimbolos.clear();
-    buffer.clear();
     tablaErrores.clear();
+    buffer.clear();
+    analisiSintactico.bufferCpy.clear();
+
+    //para el analisis sintactico
+
     std::string filenameCurrent = curFile.toStdString();
     std::fstream entrada;
     std::string line;
@@ -228,9 +237,9 @@ void MainWindow::generateTables(){
     printTablaErrores();
 
     //parte del analisis sintactico
-    BuildSintacticAnalysis();
-    analisiSintactico.PrintBufferCpy();
+
     analisiSintactico.printTablaAnalisisSintatico();
+    analisiSintactico.verifyBufferCpyValidation();
 
 
 }
