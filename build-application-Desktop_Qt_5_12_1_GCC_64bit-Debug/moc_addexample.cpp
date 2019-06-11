@@ -20,25 +20,25 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_GeneralTab_t {
+struct qt_meta_stringdata_TablaSimbolosPreview_t {
     QByteArrayData data[1];
-    char stringdata0[11];
+    char stringdata0[21];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_GeneralTab_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_TablaSimbolosPreview_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_GeneralTab_t qt_meta_stringdata_GeneralTab = {
+static const qt_meta_stringdata_TablaSimbolosPreview_t qt_meta_stringdata_TablaSimbolosPreview = {
     {
-QT_MOC_LITERAL(0, 0, 10) // "GeneralTab"
+QT_MOC_LITERAL(0, 0, 20) // "TablaSimbolosPreview"
 
     },
-    "GeneralTab"
+    "TablaSimbolosPreview"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_GeneralTab[] = {
+static const uint qt_meta_data_TablaSimbolosPreview[] = {
 
  // content:
        8,       // revision
@@ -54,7 +54,7 @@ static const uint qt_meta_data_GeneralTab[] = {
        0        // eod
 };
 
-void GeneralTab::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void TablaSimbolosPreview::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -62,53 +62,53 @@ void GeneralTab::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject GeneralTab::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject TablaSimbolosPreview::staticMetaObject = { {
     &QWidget::staticMetaObject,
-    qt_meta_stringdata_GeneralTab.data,
-    qt_meta_data_GeneralTab,
+    qt_meta_stringdata_TablaSimbolosPreview.data,
+    qt_meta_data_TablaSimbolosPreview,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *GeneralTab::metaObject() const
+const QMetaObject *TablaSimbolosPreview::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *GeneralTab::qt_metacast(const char *_clname)
+void *TablaSimbolosPreview::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_GeneralTab.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_TablaSimbolosPreview.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int GeneralTab::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int TablaSimbolosPreview::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     return _id;
 }
-struct qt_meta_stringdata_PermissionsTab_t {
+struct qt_meta_stringdata_BufferPreview_t {
     QByteArrayData data[1];
-    char stringdata0[15];
+    char stringdata0[14];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_PermissionsTab_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_BufferPreview_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_PermissionsTab_t qt_meta_stringdata_PermissionsTab = {
+static const qt_meta_stringdata_BufferPreview_t qt_meta_stringdata_BufferPreview = {
     {
-QT_MOC_LITERAL(0, 0, 14) // "PermissionsTab"
+QT_MOC_LITERAL(0, 0, 13) // "BufferPreview"
 
     },
-    "PermissionsTab"
+    "BufferPreview"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_PermissionsTab[] = {
+static const uint qt_meta_data_BufferPreview[] = {
 
  // content:
        8,       // revision
@@ -124,7 +124,7 @@ static const uint qt_meta_data_PermissionsTab[] = {
        0        // eod
 };
 
-void PermissionsTab::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void BufferPreview::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -132,53 +132,53 @@ void PermissionsTab::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject PermissionsTab::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject BufferPreview::staticMetaObject = { {
     &QWidget::staticMetaObject,
-    qt_meta_stringdata_PermissionsTab.data,
-    qt_meta_data_PermissionsTab,
+    qt_meta_stringdata_BufferPreview.data,
+    qt_meta_data_BufferPreview,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *PermissionsTab::metaObject() const
+const QMetaObject *BufferPreview::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *PermissionsTab::qt_metacast(const char *_clname)
+void *BufferPreview::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_PermissionsTab.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_BufferPreview.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int PermissionsTab::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int BufferPreview::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     return _id;
 }
-struct qt_meta_stringdata_ApplicationsTab_t {
+struct qt_meta_stringdata_Otros_t {
     QByteArrayData data[1];
-    char stringdata0[16];
+    char stringdata0[6];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_ApplicationsTab_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Otros_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_ApplicationsTab_t qt_meta_stringdata_ApplicationsTab = {
+static const qt_meta_stringdata_Otros_t qt_meta_stringdata_Otros = {
     {
-QT_MOC_LITERAL(0, 0, 15) // "ApplicationsTab"
+QT_MOC_LITERAL(0, 0, 5) // "Otros"
 
     },
-    "ApplicationsTab"
+    "Otros"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_ApplicationsTab[] = {
+static const uint qt_meta_data_Otros[] = {
 
  // content:
        8,       // revision
@@ -194,7 +194,7 @@ static const uint qt_meta_data_ApplicationsTab[] = {
        0        // eod
 };
 
-void ApplicationsTab::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Otros::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -202,30 +202,30 @@ void ApplicationsTab::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject ApplicationsTab::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject Otros::staticMetaObject = { {
     &QWidget::staticMetaObject,
-    qt_meta_stringdata_ApplicationsTab.data,
-    qt_meta_data_ApplicationsTab,
+    qt_meta_stringdata_Otros.data,
+    qt_meta_data_Otros,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *ApplicationsTab::metaObject() const
+const QMetaObject *Otros::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *ApplicationsTab::qt_metacast(const char *_clname)
+void *Otros::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_ApplicationsTab.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Otros.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int ApplicationsTab::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Otros::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     return _id;

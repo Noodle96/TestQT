@@ -50,8 +50,10 @@
 
 #ifndef TABDIALOG_H
 #define TABDIALOG_H
-
+#include<iostream>
+#include<unordered_map>
 #include <QDialog>
+#include"lexemaattributes.h"
 
 QT_BEGIN_NAMESPACE
 class QDialogButtonBox;
@@ -59,13 +61,20 @@ class QFileInfo;
 class QTabWidget;
 QT_END_NAMESPACE
 
+
+
+
+using TABLASIMBOLOSV2 = std::unordered_map<std::string,std::list<LexemaAttributes*>>;
+using  BUFFERV2 = std::list<std::pair<std::string,LexemaAttributes*>>;
+using WORDRESERVEDV2 = std::unordered_map<std::string,std::string>;
+
+
 //! [0]
 class TablaSimbolosPreview : public QWidget
 {
     Q_OBJECT
-
 public:
-    explicit TablaSimbolosPreview(QWidget *parent = 0);
+    explicit TablaSimbolosPreview(TABLASIMBOLOSV2 &,QWidget *parent = nullptr);
 };
 //! [0]
 
@@ -76,9 +85,8 @@ public:
 class BufferPreview : public QWidget
 {
     Q_OBJECT
-
 public:
-    explicit BufferPreview( QWidget *parent = 0);
+    explicit BufferPreview( BUFFERV2 &,QWidget *parent = nullptr);
 };
 //! [1]
 
@@ -89,9 +97,8 @@ public:
 class Otros : public QWidget
 {
     Q_OBJECT
-
 public:
-    explicit Otros(QWidget *parent = 0);
+    explicit Otros(QWidget *parent = nullptr);
 };
 //! [2]
 
@@ -103,9 +110,8 @@ public:
 class TabDialog : public QDialog
 {
     Q_OBJECT
-
 public:
-    explicit TabDialog(const QString &fileName, QWidget *parent = 0);
+    explicit TabDialog(TABLASIMBOLOSV2 &, BUFFERV2 &,QWidget *parent = nullptr);
 
 private:
     QTabWidget *tabWidget;

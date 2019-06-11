@@ -53,17 +53,15 @@
 #include "addexample.h"
 
 //! [0]
-TabDialog::TabDialog(const QString &fileName, QWidget *parent)
+TabDialog::TabDialog(TABLASIMBOLOSV2 &ts, BUFFERV2 &bu, QWidget *parent)
     : QDialog(parent)
 {
-    QFileInfo fileInfo(fileName);
-
     tabWidget = new QTabWidget;
     tabWidget->setTabPosition(QTabWidget::TabPosition::West);
 
-    tabWidget->addTab(new GeneralTab(fileInfo), tr("Tabla de Simbolos"));
-    tabWidget->addTab(new PermissionsTab(fileInfo), tr("Buffer"));
-    tabWidget->addTab(new ApplicationsTab(fileInfo), tr("Otros"));
+    tabWidget->addTab(new TablaSimbolosPreview(ts), tr("TblSymb"));
+    tabWidget->addTab(new BufferPreview(bu), tr("Buffer"));
+    tabWidget->addTab(new Otros(), tr("Otros"));
 //! [0]
 
 //! [1] //! [2]
@@ -89,27 +87,27 @@ TabDialog::TabDialog(const QString &fileName, QWidget *parent)
 
 //! [6]
 
-GeneralTab::GeneralTab(const QFileInfo &fileInfo, QWidget *parent)
+TablaSimbolosPreview::TablaSimbolosPreview(TABLASIMBOLOSV2 &ts,QWidget *parent)
     : QWidget(parent)
 {
-
+    //here table symbols preview
 }
 //! [6]
 
 
 
 //! [7]
-PermissionsTab::PermissionsTab(const QFileInfo &fileInfo, QWidget *parent)
+BufferPreview::BufferPreview(BUFFERV2 &bu, QWidget *parent)
     : QWidget(parent)
 {
-
+    //here buffer preview
 }
 //! [7]
 
 //! [8]
-ApplicationsTab::ApplicationsTab(const QFileInfo &fileInfo, QWidget *parent)
+Otros::Otros(QWidget *parent)
     : QWidget(parent)
 {
-
+    //here table preview
 }
 //! [8]
