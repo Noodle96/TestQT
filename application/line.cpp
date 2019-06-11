@@ -20,19 +20,20 @@ void MainWindow::visitLine(std::list<std::string>&linea,unsigned int numLinea){
         //PRIMERO BUSCAREMOS EN LA HASH DE WORDRESERVED
         IteFindHashPR = wordReserved.find((*it));
         if(IteFindHashPR != wordReserved.end()){//find
-
             //std::cout << "encontro " << (*it) << "with token " << (*IteFind).second <<  std::endl;
-            //ahora a llenar la tabla de simboos
-            IteFindhashTS = tablaSimbolos.find((*IteFindHashPR).second);
-            if(IteFindhashTS != tablaSimbolos.end()){//find
-                //SI->H    //nothing to do
-            }else{//not find
-                //NO->push
-                tablaSimbolos[(*IteFindHashPR).second].push_back(  (*IteFindHashPR).first  );
-            }
-            //ahora llenar el buffer
-            buffer.push_back(std::make_pair((*IteFindHashPR).second,(*IteFindHashPR).first));
+            //ahora a llenar la tabla de simboos                /////(*it)/////
+            LexemaAttributes *newlexema = new LexemaAttributes((*IteFindHashPR).first,numLinea,0);
+            tablaSimbolos[(*IteFindHashPR).second].push_back(newlexema);
 
+            //IteFindhashTS = tablaSimbolos.find((*IteFindHashPR).second);
+            //if(IteFindhashTS != tablaSimbolos.end()){//find
+                //SI->H    //nothing to do
+            //}else{//not find
+                //NO->push
+                //tablaSimbolos[(*IteFindHashPR).second].push_back(  (*IteFindHashPR).first  );
+            //}
+            //ahora llenar el buffer
+            buffer.push_back(std::make_pair((*IteFindHashPR).second,newlexema));
 
         }else{//not find
             //std::cout << "not find " << (*it)<<  std::endl;
@@ -40,20 +41,22 @@ void MainWindow::visitLine(std::list<std::string>&linea,unsigned int numLinea){
             //primero en el afd de variables
             if(  afdVariables.DeltaHat((*it))  ){ //find
                 //llenaremos la tabla de simbolos
-                tablaSimbolos["TOKEN_id"].push_back((*it));
+                LexemaAttributes *newlexema = new LexemaAttributes((*it),numLinea,0);
+                tablaSimbolos[TOKENID].push_back(newlexema);
                 //llenaremos el buffer
-                buffer.push_back(std::make_pair("TOKEN_id",(*it)));
+                buffer.push_back(std::make_pair(TOKENID,newlexema));
             }else{//not find
                 //sino buscaremos en el afd de numeros
                 if( afdNumbers.DeltaHat((*it)) ){//find
+                    LexemaAttributes *newlexema = new LexemaAttributes((*it),numLinea,0);
                     contentPoint = contienePunto((*it));
                     //llenaremo la tabla de simbolos
                     if(contentPoint){
-                        tablaSimbolos["TOKEN_numReal"].push_back((*it));
-                        buffer.push_back(std::make_pair("TOKEN_numReal",(*it)));
+                        tablaSimbolos[TOKENNUMREAL].push_back(newlexema);
+                        buffer.push_back(std::make_pair(TOKENNUMREAL,newlexema));
                     }else{
-                        tablaSimbolos["TOKEN_num"].push_back((*it));
-                        buffer.push_back(std::make_pair("TOKEN_num",(*it)));
+                        tablaSimbolos[TOKENNUM].push_back(newlexema);
+                        buffer.push_back(std::make_pair(TOKENNUM,newlexema));
                     }
                 }else{//not find
                     //entonces si no encontro enla hashPR y ni en los automatas

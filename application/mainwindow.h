@@ -70,6 +70,10 @@ class QSessionManager;
 QT_END_NAMESPACE
 
 
+#define TOKENID "TOKEN_id"
+#define TOKENNUM "TOKEN_num"
+#define TOKENNUMREAL "TOKEN_numReal"
+
 using TABLASIMBOLOS = std::unordered_map<std::string,std::list<LexemaAttributes*>>;
 using  BUFFER = std::list<std::pair<std::string,LexemaAttributes*>>;
 using WORDRESERVED = std::unordered_map<std::string,std::string>;
