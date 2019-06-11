@@ -58,6 +58,7 @@
 
 #include"afd.h"
 #include"syntacticanalysis.h"
+#include"lexemaattributes.h"
 
 #include <QMainWindow>
 
@@ -137,14 +138,25 @@ private:
     //hash para las palabras reservadas y simbolos de c++
     std::unordered_map<std::string,std::string> wordReserved;
 
-    //tabla se simbolos
-    //<TOKEN_if,if>
-    //<TOKEN_id,id id a er ....>
-    std::unordered_map<std::string,std::list<std::string>> tablaSimbolos;
+
+
+
+    //tabla de simbolos
+
+    //OBJETO [if|6|2] => representa que se creo un OBJETO(lexemaAttribures) con lexema if, fila 6 y columna 2
+    //                                           - lexema:string
+    //                                           - numfila: NUMFILA
+    //                                           -numColumna: NUMCOLUMNA
+    //
+    //<TOKEN_if, lista<OBJETOS*> >
+    std::unordered_map<std::string,std::list<LexemaAttributes*>> tablaSimbolos;
+
     //buffer
-    //<TOKEN_id,ropa>
-    std::list<std::pair<std::string,std::string>> buffer;
-    //tabla de errores
+    //<TOKEN_id,OBJECT*>
+    std::list<std::pair<std::string,LexemaAttributes*>> buffer;
+
+
+    //tabla de errores tanto para erroreslexicos como para errores sintacticos
     std::vector<std::string> tablaErrores;
 
 
