@@ -6,7 +6,7 @@ void MainWindow::printTablaSimbolos(){
     for(auto it = tablaSimbolos.begin() ;  it != tablaSimbolos.end(); it++){
         std::cout <<(*it).first << " ";
         for(auto et = (*it).second.begin() ; et != (*it).second.end(); et++){
-            std::cout << (*et) << " ";
+            std::cout << (*et)->getLexema() << " ";
         }
         std::cout << std::endl;
     }
@@ -17,7 +17,7 @@ void MainWindow::printTablaSimbolos(){
 void MainWindow::printBuffer(){
     std::cout << "BUFFER" << std::endl;
     for(auto it = buffer.begin() ;it != buffer.end() ; it++){
-        std::cout << (*it).first << " " << (*it).second << std::endl;
+        std::cout << (*it).first << " " << (*it).second->getLexema() << std::endl;
     }
     std::cout << std::endl;
 }

@@ -93,8 +93,9 @@ public:
     void BuildAutomathonToVariables();
     void BuildAutomathonToNumbers();
     void BuildHashWordReserve();
-    void visitLine(std::list<std::string>&,unsigned int);
+    void visitLine(std::list<std::pair<std::string,int>>&,unsigned int);
     void convertStringToList(std::string,std::list<std::string>&);
+    void separar(std::string,std::list<std::pair<std::string,int>>&);
     void quitarTabs(std::string &linea);
     bool contienePunto(std::string);
 

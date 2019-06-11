@@ -216,14 +216,15 @@ void MainWindow::generateTables(){
 
     std::string filenameCurrent = curFile.toStdString();
     std::fstream entrada;
-    std::string line;
-    std::list<std::string> listWords;
+    std::string line;             //numeroColumna//
+    std::list<std::pair<std::string,int>> listWords;
     unsigned int numLinea = 1;
     entrada.open(filenameCurrent, std::ios::in);
     while(getline(entrada,line)){
         //qDebug() << QString::fromStdString(line);
         //comentar esta linea cuando thales haga su tarea
-        convertStringToList(line,listWords);
+        //convertStringToList(line,listWords);
+        separar(line,listWords);
         /*
             con la funcion LIMPIAR devolvera la linea limpia
         */

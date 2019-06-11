@@ -10,19 +10,19 @@
 
 
 //principal function
-void MainWindow::visitLine(std::list<std::string>&linea,unsigned int numLinea){
+void MainWindow::visitLine(std::list<std::pair<std::string,int>>&linea,unsigned int numLinea){
     int word = 1;
     bool contentPoint = false;
     WORDRESERVED::iterator IteFindHashPR;
-    TABLASIMBOLOS::iterator IteFindhashTS;
+    //TABLASIMBOLOS::iterator IteFindhashTS;
     for(auto it = linea.begin() ; it != linea.end(); it++,word++){
         //std::cout << "#" << word <<" "<< (*it) << std::endl;
         //PRIMERO BUSCAREMOS EN LA HASH DE WORDRESERVED
-        IteFindHashPR = wordReserved.find((*it));
+        IteFindHashPR = wordReserved.find((*it).first);
         if(IteFindHashPR != wordReserved.end()){//find
             //std::cout << "encontro " << (*it) << "with token " << (*IteFind).second <<  std::endl;
             //ahora a llenar la tabla de simboos                /////(*it)/////
-            LexemaAttributes *newlexema = new LexemaAttributes((*IteFindHashPR).first,numLinea,0);
+            LexemaAttributes *newlexema = new LexemaAttributes((*IteFindHashPR).first,numLinea,(*it).second);
             tablaSimbolos[(*IteFindHashPR).second].push_back(newlexema);
 
             //IteFindhashTS = tablaSimbolos.find((*IteFindHashPR).second);
@@ -39,17 +39,17 @@ void MainWindow::visitLine(std::list<std::string>&linea,unsigned int numLinea){
             //std::cout << "not find " << (*it)<<  std::endl;
             //en caso no encuentre en la hash de palabras reservadad buscara en los automatas
             //primero en el afd de variables
-            if(  afdVariables.DeltaHat((*it))  ){ //find
+            if(  afdVariables.DeltaHat((*it).first)  ){ //find
                 //llenaremos la tabla de simbolos
-                LexemaAttributes *newlexema = new LexemaAttributes((*it),numLinea,0);
+                LexemaAttributes *newlexema = new LexemaAttributes((*it).first,numLinea,(*it).second);
                 tablaSimbolos[TOKENID].push_back(newlexema);
                 //llenaremos el buffer
                 buffer.push_back(std::make_pair(TOKENID,newlexema));
             }else{//not find
                 //sino buscaremos en el afd de numeros
-                if( afdNumbers.DeltaHat((*it)) ){//find
-                    LexemaAttributes *newlexema = new LexemaAttributes((*it),numLinea,0);
-                    contentPoint = contienePunto((*it));
+                if( afdNumbers.DeltaHat((*it).first) ){//find
+                    LexemaAttributes *newlexema = new LexemaAttributes((*it).first,numLinea,(*it).second);
+                    contentPoint = contienePunto((*it).first);
                     //llenaremo la tabla de simbolos
                     if(contentPoint){
                         tablaSimbolos[TOKENNUMREAL].push_back(newlexema);
@@ -61,7 +61,7 @@ void MainWindow::visitLine(std::list<std::string>&linea,unsigned int numLinea){
                 }else{//not find
                     //entonces si no encontro enla hashPR y ni en los automatas
                     //pues llena la tabla de errores
-                    tablaErrores.push_back("ERROR en la linea "+std::to_string(numLinea)+ " " + (*it) +" palabra no permitido");
+                    tablaErrores.push_back("ERROR en la linea "+std::to_string(numLinea)+ " " + (*it).first +" palabra no permitido");
                 }
             }
         }
@@ -113,6 +113,98 @@ bool MainWindow::contienePunto(std::string str){
     }
     return false;
 }
+
+
+//funcion Thales
+void MainWindow::separar(std::string fila, std::list<std::pair<std::string,int>> &respuesta)
+{
+    size_t i=0;
+    size_t columna = 0;
+    std::string lexema="";
+    while(i<fila.size())
+    {
+        char cursor=fila[i];//guardamos el caracter para no acceder cada rato mas abajo
+        //cout<<"------"<<"cursor:::::"<<cursor<<"----"<<endl;
+        if((cursor>='a'&&cursor<='z') || (cursor>='A'&&cursor<='Z') || (cursor>='0'&&cursor<='9') || cursor=='_')
+        {
+            //Si es un caracter alfanumerico
+            lexema=lexema+cursor;
+            //se concatena progresivamente
+            i++;
+        }
+        else if(cursor==' ')
+        {
+            //ignora los espacion
+            while(fila[i]==' ')
+            {
+                i++;
+            }
+            if(lexema!="")
+            {
+                //divide
+                //cout<<"------"<<lexema<<"--"<<"1"<<"----"<<endl;
+                respuesta.push_back(std::make_pair(lexema,columna));
+                lexema="";
+                columna = i;
+            }
+        }
+        else
+        {
+            //adddddd
+            if(lexema!="")
+            {
+                //divide
+                //cout<<"------"<<lexema<<"--"<<"2"<<"----"<<endl;
+                respuesta.push_back(std::make_pair(lexema,columna));
+                lexema="";
+                columna = i;
+            }
+            //divide solo el caracter
+            std::string temp="";
+            temp=temp+cursor;//la lista no quiere aceptar agregar un char, por eso lo convertimos a string
+            //cout<<"------"<<temp<<"--"<<"3"<<"----"<<endl;
+            respuesta.push_back(std::make_pair(temp,columna));
+            i++; columna = i;
+        }
+    }
+    if(lexema!="")
+    {
+        //la ultima division
+        //cout<<"------"<<lexema<<"--"<<"4"<<"----"<<endl;
+        respuesta.push_back(std::make_pair(lexema,columna));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
