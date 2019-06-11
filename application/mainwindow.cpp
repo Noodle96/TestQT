@@ -238,8 +238,8 @@ void MainWindow::generateTables(){
 
     //parte del analisis sintactico
 
-    analisiSintactico.printTablaAnalisisSintatico();
-    analisiSintactico.verifyBufferCpyValidation(buffer);
+    //analisiSintactico.printTablaAnalisisSintatico();
+    //analisiSintactico.verifyBufferCpyValidation(buffer);
 
 
 }
@@ -603,7 +603,7 @@ bool MainWindow::saveFile(const QString &fileName)
 void MainWindow::setCurrentFile(const QString &fileName)
 //! [46] //! [47]
 {
-    qDebug() << fileName;
+    qDebug() << fileName; // here show path
     curFile = fileName;
     textEdit->document()->setModified(false);
     setWindowModified(false);

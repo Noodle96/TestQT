@@ -3,7 +3,8 @@ requires(qtConfig(filedialog))
 
 HEADERS       = mainwindow.h \
     afd.h \
-    syntacticanalysis.h
+    syntacticanalysis.h \
+    lexemaattributes.h
 SOURCES       = main.cpp \
                 mainwindow.cpp \
     buildautomathon.cpp \
