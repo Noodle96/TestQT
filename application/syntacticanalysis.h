@@ -103,6 +103,7 @@ public:
         //std::cout << tablaAnalisisSintactico["E"]["TOKEN_*"].empty() << std::endl; // 1 or 0 => ok
 
         //![1]
+        return true;
     }
 
 

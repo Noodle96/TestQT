@@ -48,34 +48,69 @@
 **
 ****************************************************************************/
 
-#ifndef ADDDIALOG_H
-#define ADDDIALOG_H
+#ifndef TABDIALOG_H
+#define TABDIALOG_H
 
 #include <QDialog>
 
 QT_BEGIN_NAMESPACE
-class QLabel;
-class QPushButton;
-class QTextEdit;
-class QLineEdit;
+class QDialogButtonBox;
+class QFileInfo;
+class QTabWidget;
 QT_END_NAMESPACE
 
 //! [0]
-class AddDialog : public QDialog
+class TablaSimbolosPreview : public QWidget
 {
     Q_OBJECT
 
 public:
-    AddDialog(QWidget *parent = 0);
-    QLineEdit *nameText;
-    QTextEdit *addressText;
-
-private:
-    QLabel *nameLabel;
-    QLabel *addressLabel;
-    QPushButton *okButton;
-    QPushButton *cancelButton;
+    explicit TablaSimbolosPreview(QWidget *parent = 0);
 };
 //! [0]
 
-#endif // ADDDIALOG_H
+
+
+
+//! [1]
+class BufferPreview : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit BufferPreview( QWidget *parent = 0);
+};
+//! [1]
+
+
+
+
+//! [2]
+class Otros : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit Otros(QWidget *parent = 0);
+};
+//! [2]
+
+
+
+
+//! [3]
+
+class TabDialog : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit TabDialog(const QString &fileName, QWidget *parent = 0);
+
+private:
+    QTabWidget *tabWidget;
+    QDialogButtonBox *buttonBox;
+};
+//! [3]
+
+#endif
