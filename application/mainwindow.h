@@ -55,10 +55,12 @@
 #include<iostream>
 #include<fstream>
 #include<unordered_map> //hash
+#include<QMessageBox>
 
 #include"afd.h"
 #include"syntacticanalysis.h"
 #include"lexemaattributes.h"
+#include"addexample.h"
 
 #include <QMainWindow>
 
@@ -121,6 +123,7 @@ private slots:
     void message();
     void generateTables(); //dado el archivo curFile llenara la tabla de simbolos, buffer o tabla de errores
     void documentWasModified();
+    void showTables();
 #ifndef QT_NO_SESSIONMANAGER
     void commitData(QSessionManager &);
 #endif

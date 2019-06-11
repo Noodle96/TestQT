@@ -4,14 +4,16 @@ requires(qtConfig(filedialog))
 HEADERS       = mainwindow.h \
     afd.h \
     syntacticanalysis.h \
-    lexemaattributes.h
+    lexemaattributes.h \
+    addexample.h
 SOURCES       = main.cpp \
                 mainwindow.cpp \
     buildautomathon.cpp \
     buildwordreserved.cpp \
     line.cpp \
     funcionessupport.cpp \
-    buildsintacticanalysis.cpp
+    buildsintacticanalysis.cpp \
+    addexample.cpp
 #! [0]
 RESOURCES     = \
     application.qrc

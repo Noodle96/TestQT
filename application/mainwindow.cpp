@@ -206,6 +206,17 @@ void MainWindow::message(){
 }
 
 
+void MainWindow::showTables(){
+    //QMessageBox::information(this,"aviso","esto es un aviso");
+    AddDialog aDialog;
+    aDialog.exec();
+
+
+}
+
+
+
+
 void MainWindow::generateTables(){
     tablaSimbolos.clear();
     tablaErrores.clear();
@@ -361,10 +372,11 @@ void MainWindow::createActions()
 
 
 
-    //QMENU BUILD
+    //! [22]  QMENU BUILD
     //agregando el menuBar el toolbar para Build
     QMenu *buildMenu = menuBar()->addMenu("&Build");
     QToolBar *buildToolBar = addToolBar("Build") ;
+    //![22]
     const QIcon runIcon = QIcon::fromTheme("", QIcon(":/images/run.jpeg"));
     QAction *runAct = new QAction(runIcon, tr("&Run"), this);
     runAct->setStatusTip(tr("Run The Program"));
@@ -376,7 +388,16 @@ void MainWindow::createActions()
 
 
 
-
+    //![23] QMENU SHOW
+    QMenu *showTablesMenu = menuBar()->addMenu("&ShowTables");
+    QToolBar *showTablesToolBar = addToolBar("Show Tables") ;
+    const QIcon showIcon = QIcon::fromTheme("", QIcon(":/images/tables.png"));
+    QAction *showAct = new QAction(showIcon, tr("&show"), this);
+    showAct->setStatusTip(tr("ShowTables"));
+    connect(showAct,&QAction::triggered,this,&MainWindow::showTables);
+    showTablesMenu->addAction(showAct);
+    showTablesToolBar->addAction(showAct);
+    //! [23]
 
 
 
