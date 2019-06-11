@@ -53,6 +53,8 @@
 #include<iostream>
 #include<unordered_map>
 #include <QDialog>
+#include<QStandardItemModel>
+#include<QColumnView>
 #include"lexemaattributes.h"
 
 QT_BEGIN_NAMESPACE
@@ -75,6 +77,9 @@ class TablaSimbolosPreview : public QWidget
     Q_OBJECT
 public:
     explicit TablaSimbolosPreview(TABLASIMBOLOSV2 &,QWidget *parent = nullptr);
+private:
+    QStandardItemModel *model;
+    QColumnView *columnView;
 };
 //! [0]
 

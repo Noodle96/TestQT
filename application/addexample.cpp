@@ -57,7 +57,7 @@ TabDialog::TabDialog(TABLASIMBOLOSV2 &ts, BUFFERV2 &bu, QWidget *parent)
     : QDialog(parent)
 {
     tabWidget = new QTabWidget;
-    tabWidget->setTabPosition(QTabWidget::TabPosition::West);
+    tabWidget->setTabPosition(QTabWidget::TabPosition::North);
 
     tabWidget->addTab(new TablaSimbolosPreview(ts), tr("TblSymb"));
     tabWidget->addTab(new BufferPreview(bu), tr("Buffer"));
@@ -91,6 +91,46 @@ TablaSimbolosPreview::TablaSimbolosPreview(TABLASIMBOLOSV2 &ts,QWidget *parent)
     : QWidget(parent)
 {
     //here table symbols preview
+    model = new QStandardItemModel(this);
+    columnView = new QColumnView;
+    QStandardItem *name = new QStandardItem("Name");
+    QStandardItem *firstName = new QStandardItem("First Name");
+    QStandardItem *lastName = new QStandardItem("Last Name");
+
+    name->appendRow(firstName);
+    name->appendRow(lastName);
+    model->appendRow(name);
+    QStandardItem *john = new QStandardItem("John");
+    QStandardItem *smith = new QStandardItem("Smith");
+
+    firstName->appendRow(john);
+    lastName->appendRow(smith);
+
+    QStandardItem *address = new QStandardItem("Address");
+    QStandardItem *street = new QStandardItem("Street");
+    QStandardItem *city = new QStandardItem("City");
+    QStandardItem *state = new QStandardItem("State");
+    QStandardItem *country = new QStandardItem("Country");
+
+    address->appendRow(street);
+    address->appendRow(city);
+    address->appendRow(state);
+    address->appendRow(country);
+    model->appendRow(address);
+
+    QStandardItem *ciudad1 = new QStandardItem("New York");
+    QStandardItem *ciudad2 = new QStandardItem("Lima");
+
+    city->appendRow(ciudad1);
+    city->appendRow(ciudad2);
+
+    columnView->setModel(model);
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(columnView);
+    setLayout(layout);
+
+
+
 }
 //! [6]
 
