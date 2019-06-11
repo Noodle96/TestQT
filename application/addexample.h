@@ -52,6 +52,7 @@
 #define TABDIALOG_H
 #include<iostream>
 #include<unordered_map>
+#include<string>
 #include <QDialog>
 #include<QStandardItemModel>
 #include<QColumnView>

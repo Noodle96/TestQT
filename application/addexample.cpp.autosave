@@ -111,7 +111,7 @@ TablaSimbolosPreview::TablaSimbolosPreview(TABLASIMBOLOSV2 &ts,QWidget *parent)
             lexemaAttributes.clear();
             //std::cout << (*et)->getLexema() << " ";
         }
-        model->appendRow(token);
+        model->appendRow(token);git 
         //std::cout << std::endl;
     }
     //std::cout << std::endl;

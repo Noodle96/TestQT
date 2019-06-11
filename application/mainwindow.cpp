@@ -208,7 +208,6 @@ void MainWindow::message(){
 
 void MainWindow::showTables(){
     //QMessageBox::information(this,"aviso","esto es un aviso");
-    QString fileName("hola");
     TabDialog tabdialog(tablaSimbolos,buffer);
     tabdialog.exec();
 
