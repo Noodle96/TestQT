@@ -5,7 +5,7 @@
     1 .- Buscare el la hash wordReserved para verificar si es palabra reservada o
          los automatas(identificador,Num), en caso asi sea, llena la Tabla de simbolos
          y el buffer.
-    2 .- si no lo encuentra en la hasj o automata , llena la tabla de errores
+    2 .- si no lo encuentra en la hash o automata , llena la tabla de errores
 */
 
 
@@ -13,11 +13,11 @@
 void MainWindow::visitLine(std::list<std::string>&linea,unsigned int numLinea){
     int word = 1;
     bool contentPoint = false;
-    std::unordered_map<std::string,std::string>::iterator IteFindHashPR;
-    std::unordered_map<std::string,std::list<std::string>>::iterator IteFindhashTS;
+    WORDRESERVED::iterator IteFindHashPR;
+    TABLASIMBOLOS::iterator IteFindhashTS;
     for(auto it = linea.begin() ; it != linea.end(); it++,word++){
         //std::cout << "#" << word <<" "<< (*it) << std::endl;
-        //PRIMERO BUSCAREMOS EN LA HASH DE PALABRAS RESERVADAS
+        //PRIMERO BUSCAREMOS EN LA HASH DE WORDRESERVED
         IteFindHashPR = wordReserved.find((*it));
         if(IteFindHashPR != wordReserved.end()){//find
 

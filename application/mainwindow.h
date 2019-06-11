@@ -69,6 +69,11 @@ class QPlainTextEdit;
 class QSessionManager;
 QT_END_NAMESPACE
 
+
+using TABLASIMBOLOS = std::unordered_map<std::string,std::list<LexemaAttributes*>>;
+using  BUFFER = std::list<std::pair<std::string,LexemaAttributes*>>;
+using WORDRESERVED = std::unordered_map<std::string,std::string>;
+
 //! [0]
 class MainWindow : public QMainWindow
 {
@@ -136,7 +141,7 @@ private:
 
 
     //hash para las palabras reservadas y simbolos de c++
-    std::unordered_map<std::string,std::string> wordReserved;
+    WORDRESERVED wordReserved;
 
 
 
@@ -149,11 +154,11 @@ private:
     //                                           -numColumna: NUMCOLUMNA
     //
     //<TOKEN_if, lista<OBJETOS*> >
-    std::unordered_map<std::string,std::list<LexemaAttributes*>> tablaSimbolos;
+     TABLASIMBOLOS tablaSimbolos;
 
     //buffer
     //<TOKEN_id,OBJECT*>
-    std::list<std::pair<std::string,LexemaAttributes*>> buffer;
+    BUFFER buffer;
 
 
     //tabla de errores tanto para erroreslexicos como para errores sintacticos
