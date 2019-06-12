@@ -7,6 +7,7 @@
 #include<vector>
 #include<map>
 #include<algorithm>
+#include<QDebug>
 
 #include"lexemaattributes.h"
 
@@ -95,14 +96,18 @@ public:
         for(auto it = buffer.begin() ; it != buffer.end(); it++){
             bufferCpy.push_back(std::make_pair((*it).first,(*it).second));
         }
+
         bufferCpy.push_back( std::make_pair("$",nullptr ));
         //haciendo el reconocimiento de el buffercopy con la pila(push and pop)
         //![1] v1
+
         auto a = (bufferCpy.begin());
+
         bool accepted = true;
         TNT x;
         std::list<TNT>l;
         while(!pila.empty()){
+            qDebug() << "fffffffffffffff";
             l.clear();
             if(pila.top()=="$" && a->first=="$") return accepted;
             x= pila.top();
@@ -116,14 +121,14 @@ public:
                     else if( (*l.begin())=="sync" ){
                         if(pila.size() <= 2){
                             //indicar error
-                            tablaErrores.push_back("ERROR SINTACTICO: lexema " + a->first + " de sobra en la linea "
+                            tablaErrores.push_back("ERROR SINTACTICO: lexema " + a->second->getLexema() + " de sobra en la linea "
                                                    + std::to_string(a->second->getNumFila()) + " y columna "
                                                    + std::to_string(a->second->getNumColumna()));
                             a++;
                             accepted = false;
                         }else{
                             //indicar error
-                            tablaErrores.push_back("ERROR SINTACTICO: lexema " + a->first + " de sobra en la linea "
+                            tablaErrores.push_back("ERROR SINTACTICO: lexema " + a->second->getLexema() + " de sobra en la linea "
                                                    + std::to_string(a->second->getNumFila()) + " y columna "
                                                    + std::to_string(a->second->getNumColumna()));
                             pila.pop();
@@ -140,7 +145,7 @@ public:
                     if(it != listasTerminales.end()){//find
                         //indicar error
                         tablaErrores.push_back("ERROR SINTACTICO: Puede que le falte colocar un lexema antes o despues de "
-                                               + a->first + " en la linea "
+                                               + a->second->getLexema()+ " en la linea "
                                                + std::to_string(a->second->getNumFila()) + " y columna "
                                                + std::to_string(a->second->getNumColumna()));
                         pila.pop();
@@ -148,7 +153,7 @@ public:
                     }else{
                         //indicar error
                         tablaErrores.push_back("ERROR SINTACTICO: Puede que le falte colocar un lexema antes o despues de "
-                                               + a->first + " en la linea "
+                                               + a->second->getLexema() + " en la linea "
                                                + std::to_string(a->second->getNumFila()) + " y columna "
                                                + std::to_string(a->second->getNumColumna()));
                         a++;
@@ -157,6 +162,7 @@ public:
                 }
             }//end else
         }
+        qDebug() << "end";
         //![1]
 
     }
