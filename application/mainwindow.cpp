@@ -252,7 +252,19 @@ void MainWindow::generateTables(){
     //parte del analisis sintactico
 
     analisiSintactico.printTablaAnalisisSintatico();
-    //analisiSintactico.verifyBufferCpyValidation(buffer);
+    //analisiSintactico.verifyBufferCpyValidation(buffer,tablaErrores);
+    /*
+    std::list<TNT> l;
+    if(analisiSintactico.findInTASLL1("E","TOKEN_(",l)){
+        std::cout << "imprimiendo l" << std::endl;
+        for(auto it = l.begin() ;it != l.end() ; it++){
+            std::cout << (*it) << " ";
+        }
+        std::cout << "\n";
+    }else{
+        std::cout << "Empty" << std::endl;
+    }
+    */
 
 
 }

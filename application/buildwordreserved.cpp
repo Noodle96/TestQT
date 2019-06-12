@@ -16,8 +16,8 @@ void MainWindow::BuildHashWordReserve(){
     //add WordReserved in hash
     std::string TOKEN = "TOKEN_";
     std::string mywordReserved [] = {"alignas","alignof","and","and_eq","asm","auto","bitand","bitor","bool",
-                                      "break","case","catch","char","char16_t","char32_t","class","compl","const",
-                                      "constexpr","const_cast","continue","decltype","default","delete","do",
+                                      "break","case","catch","char","char16_t","char32_t","cin","class","compl","const",
+                                      "constexpr","const_cast","continue","cout","decltype","default","delete","do",
                                       "double","dynamic_cast","else","enum","explicit","export","extern","false",
                                       "float","for","friend","goto","if","inline","int","long","mutable","namespace",
                                       "new","noexcept","not","not_eq","nullptr","operator","or","or_eq","private",

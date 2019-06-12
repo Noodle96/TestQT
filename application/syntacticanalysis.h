@@ -4,14 +4,15 @@
 #include<iostream>
 #include<stack>
 #include<list>
+#include<vector>
 #include<map>
+#include<algorithm>
 
 #include"lexemaattributes.h"
 
 using NOTERMINAL = std::string;
 using TERMINAL = std::string;
 using TNT = std::string;
-using INICIAL = std::string;
 using TOKEN = std::string;
 
 class Gramatica{
@@ -44,7 +45,14 @@ public:
     std::map< NOTERMINAL,std::map< TERMINAL,std::list<TNT> > > tablaAnalisisSintactico;
     //std::stack<TNT> pila;
     std::list<std::pair<TOKEN,LexemaAttributes* >> bufferCpy;
+    std::list<TERMINAL> listasTerminales;
 public:
+
+    bool findInTASLL1(TNT tnt,TERMINAL term,std::list<TNT>&lista){
+        lista = tablaAnalisisSintactico[tnt][term];
+        if(lista.empty()) return false;
+        return true;
+    }
     void insertInTablaAnalisSintactico(NOTERMINAL nt, TERMINAL ter, TNT tnt){
         tablaAnalisisSintactico[nt][ter].push_back(tnt);
     }
@@ -70,47 +78,76 @@ public:
             std::cout << std::endl;
         }
     }
-    void pushPila(std::stack<TNT> &pl,TNT elem){
-        pl.push(elem);
+    void pushPila(std::stack<TNT> &pl,std::list<TNT> &l){
+        for(auto it = l.begin() ; it != l.end() ; it++){
+            pl.push((*it));
+        }
     }
 
-    bool verifyBufferCpyValidation( const std::list<std::pair<std::string,LexemaAttributes*>> &buffer){
+
+    //std::cout << tablaAnalisisSintactico["E"]["TOKEN_*"].empty() << std::endl; // 1 or 0 => ok
+    bool verifyBufferCpyValidation( const std::list<std::pair<std::string,LexemaAttributes*>> &buffer,std::vector<std::string> &tablaErrores){
         //pusheando la pila con $
         std::stack<TNT> pila;
         pila.push("$");
         pila.push("E"); //initial in buildsintacticanalysis.cpp
-
-
         //copiando buffer a bufferCopy
         for(auto it = buffer.begin() ; it != buffer.end(); it++){
             bufferCpy.push_back(std::make_pair((*it).first,(*it).second));
         }
+        bufferCpy.push_back( std::make_pair("$",nullptr ));
 
-        //bufferCpy.push_back( std::make_pair("$","$" ));
+
 
         //haciendo el reconocimiento de el buffercopy con la pila(push and pop)
         //![1] v1
-        std::list<TNT> listTemp;
-        for (auto it = bufferCpy.begin(); it != bufferCpy.end();it++){
-            //primer caso
-            if( pila.top() == (*it).first ){ //relacionamos a , es decir sale de la pila y del buffer
-                pila.pop();continue;
-            }else {
-                if(tablaAnalisisSintactico[pila.top() ][ (*it).first].empty()){ //No llega nada [a][b] = ""  |=>| error no salvable
-                    //llenar la tabla de errores
+        auto a = (bufferCpy.begin());
+        bool accepted = true;
+        TNT x;
+        std::list<TNT>l;
+        while(!pila.empty()){
+            l.clear();
+            if(pila.top()=="$" && a->first=="$") return accepted;
+            x= pila.top();
+            if(x == a->first){
+                pila.pop(); a++;
+            }else{
+                if(findInTASLL1(x,a->first,l)){
+                    if((*l.begin())=="e") {
+                        pila.pop();
+                    }
+                    else if( (*l.begin())=="sync" ){
+                        if(pila.size() <= 2){
+                            a++;
+                            accepted = false;
+                            //indicar error
+                        }else{
+                            pila.pop();
+                            accepted=false;
+                            //indicar error
+                        }
+                    }else{
+                        pila.pop();
+                        l.reverse();
+                        pushPila(pila,l);
+                    }
+                }else{
+                    auto it = std::find(listasTerminales.begin(),listasTerminales.end(),x);
+                    if(it != listasTerminales.end()){//find
+                        pila.pop();
+                        accepted=false;
+                        //indicar error-
+                    }else{
+                        a++;
+                        accepted=false;
+                        //indicar error
+                    }
                 }
-            }
+            }//end else
         }
-
-        //std::cout << tablaAnalisisSintactico["E"]["TOKEN_*"].empty() << std::endl; // 1 or 0 => ok
-
         //![1]
-        return true;
+
     }
-
-
-
-
 };
 
 

@@ -7,7 +7,11 @@ void MainWindow::BuildSintacticAnalysis(){
     //lA CREACION Y LLENADO DE LA PILA SE HACE EN LA FUNCION INTERNA MISMA
     //LA COPIA DEL BUFFERS A BUFFERCOPY SE HACE EN LA FUNCION INTERNA MISMA
 
-
+    analisiSintactico.listasTerminales.push_back("TOKEN_id");
+    analisiSintactico.listasTerminales.push_back("TOKEN_+");
+    analisiSintactico.listasTerminales.push_back("TOKEN_*");
+    analisiSintactico.listasTerminales.push_back("TOKEN_(");
+    analisiSintactico.listasTerminales.push_back("TOKEN_)");
     //copiando buffer a bufferCopy
     /*
     for(auto it = buffer.begin() ; it != buffer.end(); it++){
