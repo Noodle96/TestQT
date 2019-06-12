@@ -58,8 +58,8 @@
 #include<QMessageBox>
 
 #include"afd.h"
-#include"syntacticanalysis.h"
 #include"lexemaattributes.h"
+#include"syntacticanalysis.h"
 #include"addexample.h"
 
 #include <QMainWindow>
@@ -75,6 +75,8 @@ QT_END_NAMESPACE
 #define TOKENID "TOKEN_id"
 #define TOKENNUM "TOKEN_num"
 #define TOKENNUMREAL "TOKEN_numReal"
+#define SYNC "sync"
+#define E "e"
 
 using TABLASIMBOLOS = std::unordered_map<std::string,std::list<LexemaAttributes*>>;
 using  BUFFER = std::list<std::pair<std::string,LexemaAttributes*>>;

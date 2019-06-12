@@ -6,11 +6,13 @@
 #include<list>
 #include<map>
 
+#include"lexemaattributes.h"
 
 using NOTERMINAL = std::string;
 using TERMINAL = std::string;
 using TNT = std::string;
 using INICIAL = std::string;
+using TOKEN = std::string;
 
 class Gramatica{
 public:
@@ -41,7 +43,7 @@ class SintacticAnalysis{
 public:
     std::map< NOTERMINAL,std::map< TERMINAL,std::list<TNT> > > tablaAnalisisSintactico;
     //std::stack<TNT> pila;
-    std::list<std::pair<std::string,std::string>> bufferCpy;
+    std::list<std::pair<TOKEN,LexemaAttributes* >> bufferCpy;
 public:
     void insertInTablaAnalisSintactico(NOTERMINAL nt, TERMINAL ter, TNT tnt){
         tablaAnalisisSintactico[nt][ter].push_back(tnt);
@@ -49,7 +51,7 @@ public:
     void PrintBufferCpy(){
         std::cout << "IMPRIMIENDO BUFFER CPY" << std::endl;
         for (auto e : bufferCpy){ // compiler uses type inference to determine the right type
-                std::cout << e.first << ' ' << e.second  << std::endl;
+                std::cout << e.first << ' ' << (e).second << std::endl;
         }
     }
     void printTablaAnalisisSintatico(){
@@ -72,7 +74,7 @@ public:
         pl.push(elem);
     }
 
-    bool verifyBufferCpyValidation( const std::list<std::pair<std::string,std::string>> &buffer){
+    bool verifyBufferCpyValidation( const std::list<std::pair<std::string,LexemaAttributes*>> &buffer){
         //pusheando la pila con $
         std::stack<TNT> pila;
         pila.push("$");
@@ -81,10 +83,10 @@ public:
 
         //copiando buffer a bufferCopy
         for(auto it = buffer.begin() ; it != buffer.end(); it++){
-            bufferCpy.push_back((*it));
+            bufferCpy.push_back(std::make_pair((*it).first,(*it).second));
         }
 
-        bufferCpy.push_back( std::make_pair("$","$" ));
+        //bufferCpy.push_back( std::make_pair("$","$" ));
 
         //haciendo el reconocimiento de el buffercopy con la pila(push and pop)
         //![1] v1
@@ -110,7 +112,6 @@ public:
 
 
 };
-// estamos en el proyecto actual
 
 
 
