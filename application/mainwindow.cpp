@@ -236,7 +236,8 @@ void MainWindow::generateTables(){
         //qDebug() << QString::fromStdString(line);
         //comentar esta linea cuando thales haga su tarea
         //convertStringToList(line,listWords);
-        separarv2(line,listWords,escomentario);
+        //separarv2(line,listWords,escomentario);
+        separar(line,listWords);
         /*
             con la funcion LIMPIAR devolvera la linea limpia
         */
@@ -251,8 +252,8 @@ void MainWindow::generateTables(){
 
     //parte del analisis sintactico
 
-    analisiSintactico.printTablaAnalisisSintatico();
-    //analisiSintactico.verifyBufferCpyValidation(buffer,tablaErrores);
+    //analisiSintactico.printTablaAnalisisSintatico();
+    std::cout << analisiSintactico.verifyBufferCpyValidation(buffer,tablaErrores) << std::endl;
     /*
     std::list<TNT> l;
     if(analisiSintactico.findInTASLL1("E","TOKEN_(",l)){

@@ -96,9 +96,6 @@ public:
             bufferCpy.push_back(std::make_pair((*it).first,(*it).second));
         }
         bufferCpy.push_back( std::make_pair("$",nullptr ));
-
-
-
         //haciendo el reconocimiento de el buffercopy con la pila(push and pop)
         //![1] v1
         auto a = (bufferCpy.begin());
@@ -118,13 +115,20 @@ public:
                     }
                     else if( (*l.begin())=="sync" ){
                         if(pila.size() <= 2){
+                            //indicar error
+                            tablaErrores.push_back("ERROR SINTACTICO: lexema " + a->first + " de sobra en la linea "
+                                                   + std::to_string(a->second->getNumFila()) + " y columna "
+                                                   + std::to_string(a->second->getNumColumna()));
                             a++;
                             accepted = false;
-                            //indicar error
                         }else{
+                            //indicar error
+                            tablaErrores.push_back("ERROR SINTACTICO: lexema " + a->first + " de sobra en la linea "
+                                                   + std::to_string(a->second->getNumFila()) + " y columna "
+                                                   + std::to_string(a->second->getNumColumna()));
                             pila.pop();
                             accepted=false;
-                            //indicar error
+
                         }
                     }else{
                         pila.pop();
@@ -134,13 +138,21 @@ public:
                 }else{
                     auto it = std::find(listasTerminales.begin(),listasTerminales.end(),x);
                     if(it != listasTerminales.end()){//find
+                        //indicar error
+                        tablaErrores.push_back("ERROR SINTACTICO: Puede que le falte colocar un lexema antes o despues de "
+                                               + a->first + " en la linea "
+                                               + std::to_string(a->second->getNumFila()) + " y columna "
+                                               + std::to_string(a->second->getNumColumna()));
                         pila.pop();
                         accepted=false;
-                        //indicar error-
                     }else{
+                        //indicar error
+                        tablaErrores.push_back("ERROR SINTACTICO: Puede que le falte colocar un lexema antes o despues de "
+                                               + a->first + " en la linea "
+                                               + std::to_string(a->second->getNumFila()) + " y columna "
+                                               + std::to_string(a->second->getNumColumna()));
                         a++;
                         accepted=false;
-                        //indicar error
                     }
                 }
             }//end else
