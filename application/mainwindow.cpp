@@ -230,12 +230,13 @@ void MainWindow::generateTables(){
     std::string line;             //numeroColumna//
     std::list<std::pair<std::string,int>> listWords;
     unsigned int numLinea = 1;
+    bool escomentario;
     entrada.open(filenameCurrent, std::ios::in);
     while(getline(entrada,line)){
         //qDebug() << QString::fromStdString(line);
         //comentar esta linea cuando thales haga su tarea
         //convertStringToList(line,listWords);
-        separar(line,listWords);
+        separarv2(line,listWords,escomentario);
         /*
             con la funcion LIMPIAR devolvera la linea limpia
         */

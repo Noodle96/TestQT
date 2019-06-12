@@ -98,6 +98,7 @@ public:
     void visitLine(std::list<std::pair<std::string,int>>&,unsigned int);
     void convertStringToList(std::string,std::list<std::string>&);
     void separar(std::string,std::list<std::pair<std::string,int>>&);
+    void separarv2(std::string fila, std::list<std::pair<std::string,int>> &respuesta, bool esComentario);
     void quitarTabs(std::string &linea);
     bool contienePunto(std::string);
 
@@ -150,8 +151,6 @@ private:
 
     //hash para las palabras reservadas y simbolos de c++
     WORDRESERVED wordReserved;
-
-
 
 
     //tabla de simbolos

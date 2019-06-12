@@ -181,6 +181,241 @@ void MainWindow::separar(std::string fila, std::list<std::pair<std::string,int>>
 
 
 
+void MainWindow::separarv2(std::string fila, std::list<std::pair<std::string,int>> &respuesta, bool esComentario){
+    size_t columna = 0;
+    size_t i=0;
+    std::string lexema="";
+    while(i<fila.size())
+    {//BEGIN_WHILE
+        char cursor=fila[i];//guardamos el caracter para no acceder cada rato mas abajo
+        if(esComentario==0)
+        {//BEGIN_IF_COMENTARIO==FALSO
+            if((cursor>='a'&&cursor<='z') || (cursor>='A'&&cursor<='Z') || cursor=='_')
+            {//BEGIN_IF_ADD SECUENCIA ALFANUMERICO
+                //Si es un caracter alfanumerico
+                while((cursor>='a'&&cursor<='z') || (cursor>='A'&&cursor<='Z') || (cursor>='0'&&cursor<='9') || cursor=='_')
+                {
+                    lexema=lexema+cursor;
+                    i++;
+                    cursor=fila[i];
+                }
+                //se concatena progresivamente
+                if(lexema!="")
+                {
+                    respuesta.push_back(std::make_pair(lexema,columna)); //AÑADE SECUENCIA DE ALFANUMERICO
+                    lexema="";
+                    columna=i;
+                }
+
+            }//END_IF_ADD SECUENCIA ALFANUMERICO
+
+            else if(((cursor>='0'&&cursor<='9')) || cursor=='.')
+            {
+                char tipo=cursor;
+                while(cursor>='0'&&cursor<='9')
+                {
+                    lexema=lexema+cursor;
+                    i++;
+                    cursor=fila[i];
+                }
+                if(tipo!='.'&&cursor=='.')
+                {
+                    lexema=lexema+cursor;
+                    i++;
+                    cursor=fila[i];
+                    while(cursor>='0'&&cursor<='9')
+                    {
+                        lexema=lexema+cursor;
+                        i++;
+                        cursor=fila[i];
+                    }
+                }
+                respuesta.push_back(std::make_pair(lexema,columna));
+                lexema="";
+                columna=i;
+            }
+            else if(cursor==' ')
+            {
+                //ignora los espacion
+                while(fila[i]==' ')
+                {
+                    i++;
+                }
+                cursor=fila[i];
+            }
+            else if(cursor=='\t')
+            {
+                //ignora los espacion
+                while(fila[i]=='\t')
+                {
+                    i++;
+                }
+                cursor=fila[i];
+            }
+            //EXCEPCIONES
+            else{
+                //adddddd
+                if (cursor=='+')
+                {
+                    i++;
+                    lexema=lexema+cursor;
+                    if(fila[i]=='+')
+                    {
+                        lexema=lexema+cursor;
+                        i++;
+                    }
+                    respuesta.push_back(std::make_pair(lexema,columna));
+                    lexema="";
+                    columna = i;
+                }
+                else if (cursor=='-')
+                {
+                    i++;
+                    lexema=lexema+cursor;
+                    if(fila[i]=='-')
+                    {
+                        lexema=lexema+cursor;
+                        i++;
+                    }
+                    respuesta.push_back(std::make_pair(lexema,columna));
+                    lexema="";
+                    columna = i;
+                }
+                else if (cursor==':')
+                {
+                    i++;
+                    lexema=lexema+cursor;
+                    if(fila[i]==':')
+                    {
+                        lexema=lexema+cursor;
+                        i++;
+                    }
+                    respuesta.push_back(std::make_pair(lexema,columna));
+                    lexema="";
+                    columna=i;
+                }
+                else if (cursor=='>')
+                {
+                    i++;
+                    lexema=lexema+cursor;
+                    if(fila[i]=='>'||fila[i]=='=')
+                    {
+                        lexema=lexema+fila[i];
+                        i++;
+                    }
+                    respuesta.push_back(std::make_pair(lexema,columna));
+                    lexema="";
+                    columna=i;
+                }
+                else if (cursor=='<')
+                {
+                    i++;
+                    lexema=lexema+cursor;
+                    if(fila[i]=='<'||fila[i]=='=')
+                    {
+                        lexema=lexema+fila[i];
+                        i++;
+                    }
+                    respuesta.push_back(std::make_pair(lexema,columna));
+                    lexema="";
+                    columna=i;
+                }
+                else if (cursor=='&')
+                {
+                    i++;
+                    lexema=lexema+cursor;
+                    if(fila[i]=='&')
+                    {
+                        lexema=lexema+fila[i];
+                        i++;
+                    }
+                    respuesta.push_back(std::make_pair(lexema,columna));
+                    lexema="";
+                    columna=i;
+                }
+                else if (cursor=='|')
+                {
+                    i++;
+                    lexema=lexema+cursor;
+                    if(fila[i]=='|')
+                    {
+                        lexema=lexema+fila[i];
+                        i++;
+                    }
+                    respuesta.push_back(std::make_pair(lexema,columna));
+                    lexema="";
+                    columna=i;
+                }
+                else if (cursor=='=')
+                {
+                    i++;
+                    lexema=lexema+cursor;
+                    if(fila[i]=='=')
+                    {
+                        lexema=lexema+fila[i];
+                        i++;
+                    }
+                    respuesta.push_back(std::make_pair(lexema,columna));
+                    lexema="";
+                    columna=i;
+                }
+                else if (cursor=='!')
+                {
+                    i++;
+                    lexema=lexema+cursor;
+                    if(fila[i]=='=')
+                    {
+                        lexema=lexema+fila[i];
+                        i++;
+                    }
+                    respuesta.push_back(std::make_pair(lexema,columna));
+                    lexema="";
+                    columna=i;
+                }
+                else if (cursor=='/')
+                {
+                    i++;
+                    lexema=lexema+cursor;
+                    if(fila[i]=='/')
+                    {
+                        break;
+                    }
+                    if(fila[i]=='*')
+                    {
+                        esComentario=1;
+                    }
+                    else
+                    {
+                        respuesta.push_back(std::make_pair(lexema,columna));
+                        lexema="";
+                        columna=i;
+                    }
+                }
+                else
+                {
+                    std::string temp="";
+                    temp=temp+cursor;
+                    respuesta.push_back(std::make_pair(temp,columna));
+                    i++;
+                    columna=i;
+                }
+            }
+
+        }//END_IF_COMENTARIO==FALS0
+        else
+        {
+            if(cursor=='*')
+            {
+                i++;
+                if(fila[i]=='/')
+                    esComentario=0;
+            }
+            i++;
+        }
+    }//END_WHILE
+}//END_FUNCTION
+
+
 
 
 
