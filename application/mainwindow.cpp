@@ -254,7 +254,7 @@ void MainWindow::generateTables(){
 
     //analisiSintactico.printTablaAnalisisSintatico();
     std::cout <<"BufferCpy Aceptado ? "<< analisiSintactico.verifyBufferCpyValidation(buffer,tablaErrores) << std::endl;
-    //printTablaErrores();
+    printTablaErrores();
     /*
     std::list<TNT> l;
     if(analisiSintactico.findInTASLL1("E","TOKEN_(",l)){

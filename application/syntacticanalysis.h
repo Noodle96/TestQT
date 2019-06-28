@@ -35,6 +35,8 @@ public:
 /// CONDICION_AND -> CONDICION_LOGICA && CONDICION LOGICA
 /// CONDICION_OR -> CONDICION_LOGICA || CONDICION_LOGICA
 /// CONDICION_LOGICA -> E > E | E < E | E >= E | E <= E | E==E | E!=E
+///
+/// gramtica 2
 /// E -> E + T | E - T | T
 /// T -> T * T | T / F | F
 /// F -> i | c
@@ -107,10 +109,13 @@ public:
         TNT x;
         std::list<TNT>l;
         while(!pila.empty()){
-            qDebug() << "fffffffffffffff";
+            //qDebug() << "fffffffffffffff";
             l.clear();
             if(pila.top()=="$" && a->first=="$") return accepted;
             x= pila.top();
+            QString xq = x.c_str();
+            //qDebug() << xq;
+            //qDebug() << a->first.c_str();
             if(x == a->first){
                 pila.pop(); a++;
             }else{
