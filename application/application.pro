@@ -7,6 +7,7 @@ HEADERS       = mainwindow.h \
     lexemaattributes.h \
     addexample.h
 SOURCES       = main.cpp \
+    buildsemanticanalysis.cpp \
                 mainwindow.cpp \
     buildautomathon.cpp \
     buildwordreserved.cpp \
