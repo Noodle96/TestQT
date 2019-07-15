@@ -7,7 +7,7 @@ void MainWindow::BuildSintacticAnalysis(){
     //lA CREACION Y LLENADO DE LA PILA SE HACE EN LA FUNCION INTERNA MISMA
     //LA COPIA DEL BUFFERS A BUFFERCOPY SE HACE EN LA FUNCION INTERNA MISMA
 
-    analisiSintactico.listasTerminales.push_back("TOKEN_id");
+    analisiSintactico.listasTerminales.push_back("TOKEN_num");
     analisiSintactico.listasTerminales.push_back("TOKEN_+");
     analisiSintactico.listasTerminales.push_back("TOKEN_*");
     analisiSintactico.listasTerminales.push_back("TOKEN_(");
@@ -28,7 +28,7 @@ void MainWindow::BuildSintacticAnalysis(){
     //Initial element E of table sintactic ll1
 
     //ahora manualmente llenado la tabla de analisis sintactica LL1
-    analisiSintactico.insertInTablaAnalisSintactico("E","TOKEN_id","T");analisiSintactico.insertInTablaAnalisSintactico("E","TOKEN_id","Ep");
+    analisiSintactico.insertInTablaAnalisSintactico("E","TOKEN_num","T");analisiSintactico.insertInTablaAnalisSintactico("E","TOKEN_num","Ep");
     analisiSintactico.insertInTablaAnalisSintactico("E","TOKEN_(","T");analisiSintactico.insertInTablaAnalisSintactico("E","TOKEN_(","Ep");
     analisiSintactico.insertInTablaAnalisSintactico("E","TOKEN_)",SYNC);analisiSintactico.insertInTablaAnalisSintactico("E","$",SYNC);
 
@@ -36,7 +36,7 @@ void MainWindow::BuildSintacticAnalysis(){
     analisiSintactico.insertInTablaAnalisSintactico("Ep","TOKEN_+","Ep");analisiSintactico.insertInTablaAnalisSintactico("Ep","TOKEN_)",E);
     analisiSintactico.insertInTablaAnalisSintactico("Ep","$",E);
 
-    analisiSintactico.insertInTablaAnalisSintactico("T","TOKEN_id","F");analisiSintactico.insertInTablaAnalisSintactico("T","TOKEN_id","Tp");
+    analisiSintactico.insertInTablaAnalisSintactico("T","TOKEN_num","F");analisiSintactico.insertInTablaAnalisSintactico("T","TOKEN_num","Tp");
     analisiSintactico.insertInTablaAnalisSintactico("T","TOKEN_+",SYNC);analisiSintactico.insertInTablaAnalisSintactico("T","TOKEN_(","F");
     analisiSintactico.insertInTablaAnalisSintactico("T","TOKEN_(","Tp");analisiSintactico.insertInTablaAnalisSintactico("T","TOKEN_)",SYNC);
     analisiSintactico.insertInTablaAnalisSintactico("T","$",SYNC);
@@ -45,7 +45,7 @@ void MainWindow::BuildSintacticAnalysis(){
     analisiSintactico.insertInTablaAnalisSintactico("Tp","TOKEN_*","F");analisiSintactico.insertInTablaAnalisSintactico("Tp","TOKEN_*","Tp");
     analisiSintactico.insertInTablaAnalisSintactico("Tp","TOKEN_)",E);analisiSintactico.insertInTablaAnalisSintactico("Tp","$",E);
 
-    analisiSintactico.insertInTablaAnalisSintactico("F","TOKEN_id","TOKEN_id");analisiSintactico.insertInTablaAnalisSintactico("F","TOKEN_+",SYNC);
+    analisiSintactico.insertInTablaAnalisSintactico("F","TOKEN_num","TOKEN_num");analisiSintactico.insertInTablaAnalisSintactico("F","TOKEN_+",SYNC);
     analisiSintactico.insertInTablaAnalisSintactico("F","TOKEN_*",SYNC);analisiSintactico.insertInTablaAnalisSintactico("F","TOKEN_(","TOKEN_(");
     analisiSintactico.insertInTablaAnalisSintactico("F","TOKEN_(","E");analisiSintactico.insertInTablaAnalisSintactico("F","TOKEN_(","TOKEN_)");
     analisiSintactico.insertInTablaAnalisSintactico("F","TOKEN_)",SYNC);analisiSintactico.insertInTablaAnalisSintactico("F","$",SYNC);

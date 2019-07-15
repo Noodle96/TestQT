@@ -269,7 +269,63 @@ void MainWindow::generateTables(){
     */
 
 
-}
+    //La parte semantica estara embedida en la parte sintactica
+    //debido a que la prte Semantica utiliza una pila tambien paa
+    //hacer las reglas
+
+    //PARTE SEMANTICA
+    bool accepted = true;
+    std::stack<std::pair<TNT,std::list<TNT>> > stack_pri;
+    if( analisiSintactico.verifyBufferCpyValidation(buffer,tablaErrores) ){
+
+        analisiSintactico.Regla1(buffer,tablaErrores,accepted,stack_pri);
+        std::cout << "AcCepted in Analisis Semantico: " << accepted << std::endl;
+
+        std::stack<std::pair<TNT,std::list<TNT>> > stack_pri_cpy = stack_pri;
+        //Test
+
+        while(!stack_pri_cpy.empty()){
+
+            std::cout << stack_pri_cpy.top().first ;
+
+            if(!stack_pri_cpy.top().second.empty()){
+               std::cout << "  "  << stack_pri_cpy.top().second.begin()->front() << std::endl;
+            }
+            else{
+                std::cout << " NULL" << std::endl;
+            }
+            stack_pri_cpy.pop();
+        }
+        // End Test
+
+        auto len_stack = stack_pri.size();
+        std::list<TNT> frase;
+        while(!stack_pri.empty()){
+            concatenarSeconds(stack_pri.top().second,frase);
+
+            frase = stack_pri.top().second;
+            printListaenlazada(frase);
+            stack_pri.pop();
+            len_stack--;
+        }
+
+        //std::cout << "NO Terminal " << std::endl;
+        //std::cout << stack_pri.top().first << std::endl;
+        std::cout << "Frase final" << std::endl;
+        printListaenlazada(frase);
+        std::cout << std::endl;
+
+
+        //Ultimo Paso
+        //printValue
+        printValue(frase); // esta frase lo contiene el E=> No terminal Inicial
+
+
+
+
+    }
+
+}//end Generate Tables
 
 
 

@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include<stack>
+#include<queue>
 #include<list>
 #include<vector>
 #include<map>
@@ -86,10 +87,16 @@ public:
             pl.push((*it));
         }
     }
+    void pushPilaCompuesta(std::stack<std::pair<TNT,std::list<TNT>> > &pl,std::list<TNT> &l){
+        for(auto it = l.begin() ; it != l.end() ; it++){
+            pl.push( std::make_pair((*it),std::list<TNT>())); // (*it)
+        }
+    }
 
 
     //std::cout << tablaAnalisisSintactico["E"]["TOKEN_*"].empty() << std::endl; // 1 or 0 => ok
-    bool verifyBufferCpyValidation( const std::list<std::pair<std::string,LexemaAttributes*>> &buffer,std::vector<std::string> &tablaErrores){
+    bool verifyBufferCpyValidation( const std::list<std::pair<std::string,LexemaAttributes*>> &buffer,std::vector<std::string> &tablaErrores)
+    {
         //pusheando la pila con $
         std::stack<TNT> pila;
         pila.push("$");
@@ -108,6 +115,9 @@ public:
         bool accepted = true;
         TNT x;
         std::list<TNT>l;
+
+
+
         while(!pila.empty()){
             //qDebug() << "fffffffffffffff";
             l.clear();
@@ -126,14 +136,16 @@ public:
                     else if( (*l.begin())=="sync" ){
                         if(pila.size() <= 2){
                             //indicar error
-                            tablaErrores.push_back("ERROR SINTACTICO: lexema " + a->second->getLexema() + " de sobra en la linea "
+                            tablaErrores.push_back("ERROR SINTACTICO Puede que le falte colocar un lexema antes o despues de "
+                                                   ": lexema P<2(sync) " + a->second->getLexema() + " de sobra en la linea "
                                                    + std::to_string(a->second->getNumFila()) + " y columna "
                                                    + std::to_string(a->second->getNumColumna()));
                             a++;
                             accepted = false;
                         }else{
                             //indicar error
-                            tablaErrores.push_back("ERROR SINTACTICO: lexema " + a->second->getLexema() + " de sobra en la linea "
+                            tablaErrores.push_back("ERROR SINTACTICO (sync):Puede que le falte colocar un lexema antes o despues de "
+                                                   " lexema " + a->second->getLexema() + " de sobra en la linea "
                                                    + std::to_string(a->second->getNumFila()) + " y columna "
                                                    + std::to_string(a->second->getNumColumna()));
                             pila.pop();
@@ -170,8 +182,90 @@ public:
         qDebug() << "end";
         //![1]
 
-    }
+    } //end verifyBufferCpyValidation
+
+    /*
+        LA regla nro 1 consiste en hallar el valor de una expression
+        Por el momento el calculo se hace de izquierda a derecha
+    */
+    bool Regla1( const std::list<std::pair<std::string,LexemaAttributes*>> &buffer,
+                 std::vector<std::string> &tablaErrores,
+                 bool &accepted,std::stack<std::pair<TNT,std::list<TNT>> > &stack_pri)
+    {
+        //pusheando la pila con $
+        std::stack<TNT> pila;
+
+        // pila_pri => desapilando pila_pri se obtendra la frase correcta
+        //pila_sec  =Z mientras varia pila;
+        std::stack<TNT> pila_sec;
+        pila_sec.push("E");
+
+        pila.push("$");
+        pila.push("E"); //initial in buildsintacticanalysis.cpp
+        //copiando buffer a bufferCopy
+        for(auto it = buffer.begin() ; it != buffer.end(); it++){
+            bufferCpy.push_back(std::make_pair((*it).first,(*it).second));
+        }
+
+        bufferCpy.push_back( std::make_pair("$",nullptr ));
+        //haciendo el reconocimiento de el buffercopy con la pila(push and pop)
+        //![1] v1
+
+        auto a = (bufferCpy.begin());
+
+        //bool accepted = true;
+        TNT x;
+        std::list<TNT>l;
+        while(!pila.empty()){
+
+            l.clear();
+            if(pila.top()=="$" && a->first=="$") return accepted;
+
+            x= pila.top();
+
+            if(x == a->first){
+                pila.pop();
+                //
+                stack_pri.top().second.push_back(a->second->getLexema() );
+                pila_sec.pop();
+                //
+                a++;
+            }else{
+                if(findInTASLL1(x,a->first,l)){
+                    if((*l.begin())=="e") {
+                        pila.pop();
+                        //
+                        stack_pri.push(std::make_pair(pila_sec.top(),std::list<TNT>()));
+                        pila_sec.pop();
+                    }
+                    else{
+                        //REEMPLAZAR
+                        pila.pop();
+
+                        //pila_pri.push(pila_sec.top()); pila_sec.pop();
+                        stack_pri.push(std::make_pair(pila_sec.top(),std::list<TNT>()));
+                        pila_sec.pop();
+                        //
+                        l.reverse();
+                        //
+                        pushPila(pila,l);
+                        pushPila(pila_sec,l);
+                        //
+                    }
+                }else{
+                    std::cout << "NOT FOUND IN TAS!!" << std::endl;
+                }
+            }//end else
+
+        }
+        //![1]
+        return false;
+
+    }//end regla1
+
+
 };
+
 
 
 

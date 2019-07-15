@@ -417,15 +417,93 @@ void MainWindow::separarv2(std::string fila, std::list<std::pair<std::string,int
 
 
 
+bool MainWindow::isNumber(std::string str){
+    for(auto it = str.begin() ; it != str.end()  ; it++){
+        if( !isdigit((*it)) )return false;
+    }
+    return true;
+}
+
+bool MainWindow::isOperator(std::string str){
+    /*
+    for(auto it = str.begin() ; it != str.end()  ; it++){
+        if( (*it) != '+' || (*it) != '*'  ) return false;
+    }*/
+    if(str=="+" || str=="*")return true;
+    return false;
+}
+
+void MainWindow::StringToNumber(std::string &str, int &number){
+    std::stringstream ss(str);
+    ss >> number;
+}
 
 
+void MainWindow::concatenarSeconds(std::list<TNT> &l0, std::list<TNT> &l1){
+    if(l1.empty())return;
+    for(auto it = l1.begin() ; it != l1.end(); it++){
+        l0.push_back((*it));
+    }
+}
+
+void MainWindow::printListaenlazada(std::list<TNT> &l){
+    std::cout << "Print Lista Enlazada "  << std::endl;
+    for(auto it = l.begin() ; it != l.end(); it++){
+        std::cout << (*it) << " ";
+    }
+    std::cout << std::endl;
+}
+
+void MainWindow::printValue(std::list<TNT> &l){
+    int value = 0;
+    std::queue<int> enteros;
+    std::queue<std::string> operadores;
 
 
+    for(auto it =  l.begin() ; it != l.end(); it++){
+        if( isNumber(*it) ){
+            StringToNumber((*it),value);
+            enteros.push(value);
+        }
+        else if( isOperator((*it)) ){
+            operadores.push((*it));
+        }
+    }
 
+    //printed colas
+    std::cout << "printed enteros" << std::endl;
+    /*
+    while(!enteros.empty()){
+        std::cout << enteros.front() << std::endl;
+        enteros.pop();
+    }
+    std::cout << "printed operadores" << std::endl;
+    while(!operadores.empty()){
+        std::cout << operadores.front() << std::endl;
+        operadores.pop();
+    }
+    */
 
+    int result = enteros.front(); enteros.pop();
+    std::string operador = "";
+    while(!enteros.empty()){
+        //std::cout <<  << std::endl;
+        operador = operadores.front(); operadores.pop();
+        if(operador=="+"){
+            result = result + enteros.front();
+            enteros.pop();
+            //std::cout << operador << std::endl;
+        }
+        else if(operador == "*"){
+            result = result * enteros.front();
+            enteros.pop();
+            //std::cout << operador << std::endl;
+        }
+        //std::cout << result << std::endl;
+    }
+    std::cout << "SEMANTIC-PRINT " << result << std::endl;
 
-
-
+}
 
 
 

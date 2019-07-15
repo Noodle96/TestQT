@@ -54,6 +54,8 @@
 
 #include<iostream>
 #include<fstream>
+#include <sstream>
+#include<cctype>
 #include<unordered_map> //hash
 #include<QMessageBox>
 
@@ -103,7 +105,12 @@ public:
     void separarv2(std::string fila, std::list<std::pair<std::string,int>> &respuesta, bool esComentario);
     void quitarTabs(std::string &linea);
     bool contienePunto(std::string);
-
+    bool isNumber(std::string);
+    bool isOperator(std::string);
+    void StringToNumber(std::string&, int&);
+    void concatenarSeconds(std::list<TNT>&,std::list<TNT>&);
+    void printListaenlazada(std::list<TNT>&);
+    void printValue(std::list<TNT> &l);
     //printed
     void printTablaSimbolos();
     void printBuffer();
